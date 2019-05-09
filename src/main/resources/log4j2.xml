@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: FATAL > ERROR > WARN > INFO > DEBUG > TRACE-->
+<!--TODO log4j2 配置详解 和其特性-->
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<configuration status="OFF">
+    <Properties>
+        <Property name="log.path">D:/log</Property>
+    </Properties>
+
+    <!--定义日志输出点-->
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n"/><!--输出日志的格式-->
+        </console>
+
+        <!-- INFO级别日志 按天输出到文件，归类到年月目录 -->
+        <RollingFile name="RollingFileInfo" fileName="${log.path}/info.log" filePattern="${log.path}/logs/${date:yyyy-MM}/info-%d{yyyy-MM-dd}.log.zip">
+            <PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n"/>
+            <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${log.path}/error.log" filePattern="${log.path}/logs/${date:yyyy-MM}/error-%d{yyyy-MM-dd}.log.zip">
+            <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n"/>
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <!--只有定义了logger并引入appender，appender才会生效-->
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.mybatis" level="INFO"/>
+        <logger name="com.baiding" level="INFO"/>
+
+        <root level="debug">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+</configuration>

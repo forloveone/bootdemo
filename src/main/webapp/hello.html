@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>hello</title>
+</head>
+<body>
+<!--<form action="student/insert" method="post">-->
+<!--姓名:<input type="text" name="name" value=""/><br/>-->
+<!--年龄:<input type="text" name="age" value=""/><br/>-->
+<!--<input type="submit" value="提交"/>-->
+<!--</form>-->
+
+<form action="fileUpload" method="post" enctype="multipart/form-data">
+    <h2>文件上传</h2>
+    文件:<input type="file" name="file"/><br/><br/>
+    <input type="submit" value="上传"/>
+</form>
+
+<!-- 只要一个在服务器上的路径,浏览器就会根据路径去下载文件的  有的格式文件不会下载会在浏览器打开就需要download属性了-->
+<a href="fileUpload/2019/04/23/hello.jpg" download="hello.jpg">下载</a>
+</body>
+</html>
