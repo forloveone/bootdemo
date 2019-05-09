@@ -9,7 +9,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * TODO 待研究
  * 这个java 操作视频的库JMF,但是对视频文件格式的支持并不好
  */
 public class Movie implements ControllerListener {

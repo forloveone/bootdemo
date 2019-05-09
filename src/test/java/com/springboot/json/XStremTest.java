@@ -41,7 +41,6 @@ public class XStremTest {
 
     @Test
     public void xstream() {
-        //TODO XStream的东西可以扩展成为一个工具类
         XStream xstream = new XStream();
         xstream.autodetectAnnotations(true);
         String xml = xstream.toXML(xmlTest);

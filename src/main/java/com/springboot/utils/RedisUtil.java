@@ -1,24 +1,24 @@
 package com.springboot.utils;
 
-import com.springboot.pojo.TestPojo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Fixme
  * 这个工具类中可以把 方法改成static的
- * <p>
- * TODO 这个工具类有些方法需要改造
+ * 这个工具类有些方法需要改造
  */
 @Component
 public class RedisUtil {
@@ -31,6 +31,9 @@ public class RedisUtil {
         RedisUtil.redisTemplate = redisTemplate;
     }
 
+    /**
+     * 提供了原生的redisTemplate 防止使用到工具类中没有封装redis的命令
+     */
     public static RedisTemplate<String, Object> getRedisTemplate() {
         return redisTemplate;
     }

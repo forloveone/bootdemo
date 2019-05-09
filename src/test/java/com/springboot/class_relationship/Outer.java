@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.CharBuffer;
 
 /**
- * TODO 内部类的应用?
  * java的多继承是继承一个类,实现多个接口(是一种特殊实现),内部类可以真正做到多继承
  * 内部类,配合接口,抽象类实现多继承,内部类允许继承多个非接口类型
  * 内部类使得多重继承的解决方案变得完整

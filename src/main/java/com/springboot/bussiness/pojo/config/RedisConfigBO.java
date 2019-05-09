@@ -1,4 +1,4 @@
-package com.springboot.pojo.config;
+package com.springboot.bussiness.pojo.config;
 
 import com.springboot.config.YamlPropertySourceFactory;
 import lombok.Data;

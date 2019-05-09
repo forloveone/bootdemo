@@ -1,8 +1,8 @@
 package com.springboot.redis;
 
 import com.springboot.SpringBootRun;
-import com.springboot.pojo.Person;
-import com.springboot.pojo.TestPojo;
+import com.springboot.bussiness.pojo.Person;
+import com.springboot.bussiness.pojo.TestPojo;
 import com.springboot.utils.RedisUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -75,7 +75,7 @@ public class RedisTest {
     @Test
     public void redisKeys(){
         Set<String> set = RedisUtil.getRedisTemplate().keys("123");
-        System.out.println();
+        System.out.println(set);
     }
 
     /**

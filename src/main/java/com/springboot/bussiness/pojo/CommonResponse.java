@@ -1,4 +1,4 @@
-package com.springboot.pojo;
+package com.springboot.bussiness.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

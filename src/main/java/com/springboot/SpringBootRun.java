@@ -17,20 +17,41 @@ public class SpringBootRun {
 
     public static void main(String[] args) {
 //        SpringApplication.run(SpringBootRun.class, args);
-
         SpringApplication application = new SpringApplication(SpringBootRun.class);
         application.setBannerMode(Banner.Mode.OFF);//banner关闭
         application.run(args);
     }
 
-    private void toDo(){
+    private void toDo() {
         //TODO springbootTest
-        //看到ssmconfig项目中 TestControll test5
         //Trasa 注解回滚
         //集成mybatis 基本操作
         //集成redis 基本操作
-        //TODO Volatile 可以修饰什么? 多线程
-        //TODO 从Test项目中搬迁代码
+        //拦截器:
+        /*
+            数据处理
+                Data属性处理 日期工具应该参考 joda
+                xml
+                    XStream的东西可以扩展成为一个工具类 XStremTest
+                java 操作excel world File 等
+            数据加密解密
+            项目间数据传输   验证apache 的httpclient 发送报文 接受报文的 ApacheClient
+         */
+    }
+
+    private void question() {
+        //内部类的应用? com.springboot.class_relationship.Outer
+        //execution 详解 复杂的aop能实现什么? aop 不能用拦截器吗? AspectJTest
+    }
+
+//    private void future() {
+//        //java 操作视频
+//    }
+
+    private void 一个项目应该有的模块() {
+        //安全
+        //页面
+        //db
+        //缓存
     }
 }
-

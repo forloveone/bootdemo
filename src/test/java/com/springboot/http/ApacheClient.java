@@ -9,9 +9,6 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
-/**
- *  TODO 是想验证apache 的httpclient 发送报文 接受报文的
- */
 public class ApacheClient {
     public static void main(String args[]) {
         // 创建HttpClientBuilder

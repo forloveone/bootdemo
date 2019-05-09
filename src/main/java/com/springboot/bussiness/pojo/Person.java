@@ -1,7 +1,6 @@
-package com.springboot.pojo;
+package com.springboot.bussiness.pojo;
 
 import com.springboot.config.YamlPropertySourceFactory;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.boot.context.properties.ConfigurationProperties;

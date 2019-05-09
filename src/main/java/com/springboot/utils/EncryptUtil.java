@@ -2,10 +2,10 @@ package com.springboot.utils;
 
 import java.security.MessageDigest;
 
-//加密工具类
+//
 
 /**
- * TODO 应该有更好的,例如srcurity中
+ * 加密工具类
  */
 public class EncryptUtil {
 
