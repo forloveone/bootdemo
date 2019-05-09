@@ -17,6 +17,7 @@ public class RedisConfig {
      * 实例化 RedisTemplate 对象
      * redisConnectionFactory 主动注入的直接可以作为方法的参数
      */
+
     @Bean
     public RedisTemplate<String, Object> functionDomainRedisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
