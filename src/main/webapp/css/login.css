@@ -1,0 +1,14 @@
+body {
+    padding-top: 150px;
+    padding-bottom: 40px;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#btn{
+    right:300px;
+}

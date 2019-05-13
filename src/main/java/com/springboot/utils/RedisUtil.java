@@ -154,7 +154,7 @@ public class RedisUtil {
      * 递增
      *
      * @param key 键
-     * @param by  要增加几(大于0)
+     * @param delta  要增加几(大于0)
      * @return
      */
     public long incr(String key, long delta) {
@@ -168,7 +168,7 @@ public class RedisUtil {
      * 递减
      *
      * @param key 键
-     * @param by  要减少几(小于0)
+     * @param delta  要减少几(小于0)
      * @return
      */
     public long decr(String key, long delta) {
@@ -303,8 +303,7 @@ public class RedisUtil {
      * 从redis hash 中取出 转成为pojo
      *
      * @param key
-     * @param pojo
-     * @param <T>
+     * @param cal   类的类型
      * @return
      */
     public static <U> U hGetPojo(String key, Class<U> cal) {

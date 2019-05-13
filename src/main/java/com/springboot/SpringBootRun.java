@@ -23,20 +23,38 @@ public class SpringBootRun {
     }
 
     private void toDo() {
-        //TODO springbootTest
-        //Trasa 注解回滚
-        //集成mybatis 基本操作
-        //集成redis 基本操作
-        //拦截器:
         /*
-            数据处理
-                Data属性处理 日期工具应该参考 joda
-                xml
-                    XStream的东西可以扩展成为一个工具类 XStremTest
-                java 操作excel world File 等
-            数据加密解密
-            项目间数据传输   验证apache 的httpclient 发送报文 接受报文的 ApacheClient
+            集成mybatis 基本操作
+                注解回滚
          */
+
+        /*
+            集成redis get 基本操作 配置详解
+         */
+
+        /*
+            拦截器 和 Aop 的区别
+         */
+
+        /*
+         数据处理
+                Data属性处理 日期工具应该参考 joda
+                        xml
+                XStream的东西可以扩展成为一个工具类 XStremTest
+                java 操作excel world File 等
+                        数据加密解密
+                项目间数据传输 验证apache 的httpclient 发送报文 接受报文的 ApacheClient
+         */
+    }
+
+    private void 一个项目应该有的模块() {
+        //日志get  配置进阶 分布式日志
+        //安全 shiro 和 scrity 选择
+        //页面 bootstrap + jquery
+        //db mysql(连接池用什么) + redis缓存
+        //缓存 用什么
+        //rebittmq quartz
+        //springcloud
     }
 
     private void question() {
@@ -44,14 +62,7 @@ public class SpringBootRun {
         //execution 详解 复杂的aop能实现什么? aop 不能用拦截器吗? AspectJTest
     }
 
-//    private void future() {
-//        //java 操作视频
-//    }
-
-    private void 一个项目应该有的模块() {
-        //安全
-        //页面
-        //db
-        //缓存
-    }
+    //    private void future() {
+    //        //java 操作视频
+    //    }
 }

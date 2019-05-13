@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link href="../css/login.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                $("#myModal").modal("toggle");
+            })
+        })
+    </script>
+</head>
+<body background="../img/login.jpg">
+<!--<form action="student/insert" method="post">-->
+<!--姓名:<input type="text" name="name" id="name" value=""/><br/>-->
+<!--年龄:<input type="text" name="age" value=""/><br/>-->
+<!--<input type="submit" value="提交"/>-->
+<!--</form>-->
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">请登录</h2>
+        <input type="email" id="inputEmail" class="form-control" placeholder="用户名" required autofocus>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住我
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
+
+<button class="btn btn-primary" type="button" id="btn">点击我</button>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">标题</h4>
+            </div>
+            <div class="modal-body">
+                <p>模态弹出窗主体内容</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
