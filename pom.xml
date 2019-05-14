@@ -19,6 +19,7 @@
     </properties>
 
     <dependencies>
+        <!--对web的支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,24 +31,32 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!--对redis的支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!--热部署需要-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--对aop的支持-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-            <version>2.6.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!--使用log4j2 来作为项目的日志,性能最好-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <!--对测试的支持-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <!--    <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -60,45 +69,25 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>-->
-
-        <!--使用log4j2 来作为项目的日志,性能最好-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!--引入校验框架-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.0.9.Final</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/javax.media/jmf java播放器 -->
         <dependency>
             <groupId>javax.media</groupId>
             <artifactId>jmf</artifactId>
             <version>2.1.1e</version>
         </dependency>
-
         <!--引入lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.10</version>
         </dependency>
-
+        <!--引入apache工具-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -108,6 +97,15 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
         <!--引入json操作框架gson-->
         <dependency>
@@ -120,6 +118,12 @@
             <artifactId>xstream</artifactId>
             <version>1.4.10</version>
         </dependency>
+        <!--想要mvc 返回对象默认使用xml格式需要这个jar包-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.9.5</version>
+        </dependency>
 
         <!--ConfigurationProperties注解使用时idea不报红-->
         <dependency>
@@ -127,7 +131,6 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!-- pinyin4j 拼音工具-->
         <dependency>
             <groupId>com.belerweb</groupId>
@@ -170,23 +173,6 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
-        <!-- POI核心依赖 -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.8</version>
-        </dependency>
-        <!-- 为POI支持Office Open XML -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>3.8</version>
-        </dependency>
         <!-- 支持Word文档的操作 -->
         <dependency>
             <groupId>org.apache.poi</groupId>

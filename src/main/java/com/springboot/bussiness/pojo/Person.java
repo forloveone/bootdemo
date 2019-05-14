@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Data
@@ -17,6 +19,8 @@ import java.io.Serializable;
 public class Person implements Serializable {
     @Length(max = 1)
     private String name;
+    @Max(100)
+    @Min(1)
     private String age;
     private String address;
 

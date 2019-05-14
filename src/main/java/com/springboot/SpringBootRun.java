@@ -3,6 +3,8 @@ package com.springboot;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -12,7 +14,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * EnableScheduling 开启spring定时任务支持 和 Scheduled 配合使用
  */
 @SpringBootApplication
-@EnableScheduling
+@EnableScheduling //定时任务支持
+@EnableAspectJAutoProxy //aop注解支持
+@EnableAsync //异步任务的支持
 public class SpringBootRun {
 
     public static void main(String[] args) {
@@ -27,15 +31,12 @@ public class SpringBootRun {
             集成mybatis 基本操作
                 注解回滚
          */
-
         /*
             集成redis get 基本操作 配置详解
          */
-
         /*
             拦截器 和 Aop 的区别
          */
-
         /*
          数据处理
                 Data属性处理 日期工具应该参考 joda
@@ -45,15 +46,39 @@ public class SpringBootRun {
                         数据加密解密
                 项目间数据传输 验证apache 的httpclient 发送报文 接受报文的 ApacheClient
          */
+        /*
+            多线程
+            定时任务 	quartz 分布式定时任务处理?
+         */
+        /*
+            反射
+         */
+        /*
+            IO
+         */
+        /*
+        分布式日志
+         */
+    }
+
+    private void 存在特性() {
+        /*
+            日志 配置进阶(tdo)
+            git 版本工具
+            maven jar包管理工具
+            mvc pojo进入代码时的参数校验
+         */
     }
 
     private void 一个项目应该有的模块() {
-        //日志get  配置进阶 分布式日志
         //安全 shiro 和 scrity 选择
-        //页面 bootstrap + jquery
+        //页面 bootstrap(样式和组件) + jquery(操作dom) 需要一个模板引擎(JSP或者其他)
         //db mysql(连接池用什么) + redis缓存
-        //缓存 用什么
-        //rebittmq quartz
+        //缓存
+        //RabitMQ quartz
+        //jekuns 自动发布
+        //sonar 代码审查
+
         //springcloud
     }
 
