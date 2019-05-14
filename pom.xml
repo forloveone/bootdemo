@@ -106,6 +106,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+            <version>2.5</version>
         </dependency>
         <!--引入json操作框架gson-->
         <dependency>
