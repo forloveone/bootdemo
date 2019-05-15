@@ -141,7 +141,7 @@ public class TestController {
     @RequestMapping(value = "/xml",produces = "application/xml;charset=UTF-8")
     @ResponseBody
     public TestPojo responseXml(){
-        return new TestPojo(11,11.1,"wangwu",new Date(), new BigDecimal("11.1"));
+        return new TestPojo(123,123.12,"wangwu",new Date(), new BigDecimal("11.1"));
     }
 
     //默认返回的就是json 格式的数据
