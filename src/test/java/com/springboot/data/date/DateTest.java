@@ -1,5 +1,6 @@
-package com.springboot.cal;
+package com.springboot.data.date;
 
+import com.springboot.utils.DateUtil;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
@@ -8,9 +9,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTest {
-
     @Test
     public void test() throws ParseException {
+        System.out.println(DateUtil.convertTimeToLong("1990-01-27"));;
+        long d = DateUtil.parseIdCardForBirthdayMilli("410504199001270513");
+        System.out.println(d);
+
+        int age = DateUtil.parseIdCardforAge("410504199001270513");
+        System.out.println(age);
+    }
+
+    @Test
+    public void test3() throws ParseException {
         String s = "Wed Apr 24 12:46:35 CST 2019";
         String dateString = "Tue Apr 15 11:23:55 CST 2014";
         SimpleDateFormat sfEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -2,6 +2,8 @@ package com.springboot.cal;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 public class MathTest {
     @Test
     public void test(){
@@ -11,4 +13,15 @@ public class MathTest {
         System.out.println(Math.floor(d));//返回小于或等于指定数字的最大整数
         System.out.println(Math.abs(a));//取绝对值
     }
+
+    /*
+        使用bigDecimal可以避免精度问题
+     */
+    @Test
+    public void test2(){
+        BigDecimal bigDecimal1 = new BigDecimal("1.0");
+        BigDecimal bigDecimal2 = new BigDecimal("0.9");
+        System.out.println(bigDecimal1.subtract(bigDecimal2));
+    }
+
 }

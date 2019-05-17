@@ -39,12 +39,19 @@ public class SpringBootRun {
          */
         /*
          数据处理
+                枚举
                 Data属性处理 日期工具应该参考 joda
-                        xml
-                XStream的东西可以扩展成为一个工具类 XStremTest
+                xml
+                    XStream的东西可以扩展成为一个工具类 XStremTest
+                Json
+                String
                 java 操作excel world File 等
                         数据加密解密
                 项目间数据传输 验证apache 的httpclient 发送报文 接受报文的 ApacheClient
+
+          http请求post,get(两个站点的通信)
+                使用多线程并发请求另一个站点
+                spring restTemplate,两个服务器之间的数据交换(java)
          */
         /*
             多线程
@@ -57,7 +64,13 @@ public class SpringBootRun {
             IO
          */
         /*
-        分布式日志
+            分布式日志 lmax无锁异步日志
+         */
+        /*
+            分布式session原理
+         */
+        /*
+            批处理的概念,是一次执行多条语句吗?
          */
     }
 
@@ -73,7 +86,7 @@ public class SpringBootRun {
     private void 一个项目应该有的模块() {
         //安全 shiro 和 scrity 选择
         //页面 bootstrap(样式和组件) + jquery(操作dom) 需要一个模板引擎(JSP或者其他)
-        //db mysql(连接池用什么) + redis缓存
+        //db mysql(连接池用什么) + redis缓存  redis缓存和mysql的切换时机(优雅的代码)
         //缓存
         //RabitMQ quartz
         //jekuns 自动发布

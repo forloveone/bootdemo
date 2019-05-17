@@ -1,4 +1,4 @@
-package com.springboot.enums;
+package com.springboot.data.enums;
 
 import org.junit.Test;
 

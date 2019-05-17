@@ -1,4 +1,4 @@
-package com.springboot.json;
+package com.springboot.data.json;
 
 import com.springboot.utils.PinYinUtil;
 import org.junit.Test;

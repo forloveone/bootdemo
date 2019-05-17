@@ -1,4 +1,4 @@
-package com.springboot.json;
+package com.springboot.data.json;
 
 import com.springboot.pojo.xml.*;
 import com.thoughtworks.xstream.XStream;

@@ -1,6 +1,7 @@
-package com.springboot.json;
+package com.springboot.data.json;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.Random;
@@ -9,6 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringTest {
+
+    String str = new String("good");
+    char[] ch = { 'a', 'b', 'c' };
 
     /**
      * split test
@@ -52,6 +56,11 @@ public class StringTest {
         int x = 10;
         testInt(x);
         System.out.println(x);
+
+
+        change(str,ch);
+        System.out.println(str);
+        System.out.println(ch);
     }
 
     /**
@@ -61,6 +70,11 @@ public class StringTest {
     private void operate(StringBuffer x, StringBuffer y) {
         x.append(y);
         y = x;
+    }
+    //
+    private void change(String str2, char[] ch2) {
+        str = "test ok";
+        ch[0] = 'g';
     }
 
     /**
@@ -214,5 +228,17 @@ public class StringTest {
         StringBuilder sb = new StringBuilder(20);
         sb.append("1234567890abcdef1234");//20
         sb.append("123");
+    }
+
+    @Test
+    public void hiddenString(){
+        String name = "王某mount";
+        String test = "  ";
+        test = null;
+        System.out.println(StringUtils.isNotEmpty(test));
+        //推荐使用isNotBlank 可以排除"   "这种情况
+        System.out.println(StringUtils.isNotBlank(test));
+
+        System.out.println(StringUtils.rightPad(StringUtils.left(name,1),StringUtils.length(name),"*"));
     }
 }

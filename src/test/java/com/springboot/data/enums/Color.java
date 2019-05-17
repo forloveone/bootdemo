@@ -1,4 +1,4 @@
-package com.springboot.enums;
+package com.springboot.data.enums;
 
 //枚举都继承自java.lang.Enum类
 //枚举可以实现接口

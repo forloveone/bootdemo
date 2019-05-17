@@ -3,7 +3,7 @@ package com.springboot.cal;
 import org.junit.Test;
 
 /**
- *  java运算相关
+ * java运算相关
  */
 public class Calculate {
     /**
@@ -60,7 +60,6 @@ public class Calculate {
 
     /**
      * 输出九九乘法表
-     *
      */
     @Test
     public void multiplicationTable() {
@@ -102,5 +101,19 @@ public class Calculate {
             result += temp;
         }
         System.out.println(result);
+    }
+
+    /**
+     * 输出星星
+     */
+    @Test
+    public void test() {
+        //双for循环
+        for (int i = 0; i < 5; i++) {
+            for (int j = 5; j > i; j--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
     }
 }

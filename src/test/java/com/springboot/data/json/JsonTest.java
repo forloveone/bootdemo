@@ -1,4 +1,4 @@
-package com.springboot.json;
+package com.springboot.data.json;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;

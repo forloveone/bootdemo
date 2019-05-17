@@ -1,4 +1,4 @@
-package com.springboot.fanxing;
+package com.springboot.genericity;
 
 import com.springboot.pojo.Student;
 import com.springboot.pojo.Teacher;
