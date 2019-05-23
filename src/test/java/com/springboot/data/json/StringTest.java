@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 public class StringTest {
 
     String str = new String("good");
-    char[] ch = { 'a', 'b', 'c' };
+    char[] ch = {'a', 'b', 'c'};
 
     /**
      * split test
@@ -40,6 +41,7 @@ public class StringTest {
     }
 
     //整个的运算结果为ACDB  B
+
     /**
      * https://www.cnblogs.com/xiaoxiaoyihan/p/4883770.html
      * Java对对象采用的不是引用调用，实际上，对象引用进行的是值传递
@@ -58,7 +60,7 @@ public class StringTest {
         System.out.println(x);
 
 
-        change(str,ch);
+        change(str, ch);
         System.out.println(str);
         System.out.println(ch);
     }
@@ -71,6 +73,7 @@ public class StringTest {
         x.append(y);
         y = x;
     }
+
     //
     private void change(String str2, char[] ch2) {
         str = "test ok";
@@ -207,31 +210,31 @@ public class StringTest {
     }
 
     /**
-     *  public AbstractStringBuilder append(String str) {
-     *         if (str == null)
-     *             return appendNull();
-     *         int len = str.length();
-     *         ensureCapacityInternal(count + len); //
-     *         str.getChars(0, len, value, count);
-     *         count += len;
-     *         return this;
-     *     }
-     *
-     *     是默认16
-     *     会根据 它会将自身容量增加到当前的2倍再加2
-     *     所以如果能预估出字符串长度,可以减少底层的数组扩容
-     *
-     *     可以断点跟进去看看
+     * public AbstractStringBuilder append(String str) {
+     * if (str == null)
+     * return appendNull();
+     * int len = str.length();
+     * ensureCapacityInternal(count + len); //
+     * str.getChars(0, len, value, count);
+     * count += len;
+     * return this;
+     * }
+     * <p>
+     * 是默认16
+     * 会根据 它会将自身容量增加到当前的2倍再加2
+     * 所以如果能预估出字符串长度,可以减少底层的数组扩容
+     * <p>
+     * 可以断点跟进去看看
      */
     @Test
-    public void stringBuilderTest(){
+    public void stringBuilderTest() {
         StringBuilder sb = new StringBuilder(20);
         sb.append("1234567890abcdef1234");//20
         sb.append("123");
     }
 
     @Test
-    public void hiddenString(){
+    public void hiddenString() {
         String name = "王某mount";
         String test = "  ";
         test = null;
@@ -239,6 +242,21 @@ public class StringTest {
         //推荐使用isNotBlank 可以排除"   "这种情况
         System.out.println(StringUtils.isNotBlank(test));
 
-        System.out.println(StringUtils.rightPad(StringUtils.left(name,1),StringUtils.length(name),"*"));
+        System.out.println(StringUtils.rightPad(StringUtils.left(name, 1), StringUtils.length(name), "*"));
+    }
+
+    /**
+     * 编码转换
+     * @throws UnsupportedEncodingException
+     */
+    @Test
+    public void utf_8() throws UnsupportedEncodingException {
+        String a = new String("到高处看一看吧---杜金跃".getBytes("utf-8"), "iso-8859-1");
+        System.out.println(a);
+        String b = new String(a.getBytes("iso-8859-1"), "utf-8");
+        System.out.println(b);
+        String c = "å°é«å¤çä¸çå§---æéè·";
+        String f = new String(c.getBytes("iso-8859-1"), "utf-8");
+        System.out.println(f);
     }
 }

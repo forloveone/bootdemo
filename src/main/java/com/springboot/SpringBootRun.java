@@ -44,8 +44,9 @@ public class SpringBootRun {
                 xml
                     XStream的东西可以扩展成为一个工具类 XStremTest
                 Json
-                String
-                java 操作excel world File 等
+                String 正则表达式
+                java 操作excel world File html
+                        Jsoup java解析html文档的工具,可以用来做爬虫
                         数据加密解密
                 项目间数据传输 验证apache 的httpclient 发送报文 接受报文的 ApacheClient
 
@@ -61,7 +62,7 @@ public class SpringBootRun {
             反射
          */
         /*
-            IO
+            IO  非阻塞IO
          */
         /*
             分布式日志 lmax无锁异步日志

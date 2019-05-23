@@ -24,4 +24,14 @@ public class MathTest {
         System.out.println(bigDecimal1.subtract(bigDecimal2));
     }
 
+    /**
+     * 如何去除小数点前两位,并四舍五入.
+     */
+    @Test
+    public void test3(){
+        double d = 1256.22d;
+        d = d/100;
+        System.out.println(d);//12.5622
+        System.out.println(Math.round(d)*100);//13*100 = 1300
+    }
 }

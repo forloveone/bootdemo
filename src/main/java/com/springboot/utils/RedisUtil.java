@@ -301,7 +301,7 @@ public class RedisUtil {
 
     /**
      * 从redis hash 中取出 转成为pojo
-     *
+     *  Map转pojo
      * @param key
      * @param cal   类的类型
      * @return
