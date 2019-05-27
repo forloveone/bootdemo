@@ -7,8 +7,8 @@ import com.springboot.utils.RedisUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
@@ -18,20 +18,13 @@ import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {SpringBootRun.class})
-@TestPropertySource("classpath:/config/redis.properties") //只支持properties
 public class RedisTest {
-//    @Autowired
-//    private RedisTemplate redisTemplate;
-
-//    @Autowired
-//    private RedisUtil redisUtil;
-
-
+    @Autowired
     private Person person;
     private TestPojo pojo;
 
     @Before
-    public void init(){
+    public void init() {
         Person person = new Person();
         person.setAddress("中国");
         person.setAge("23");
@@ -52,42 +45,42 @@ public class RedisTest {
      */
     @Test
     public void redisString() {
-//        boolean set = RedisUtil.set("123", person);
-//        System.out.println(set);
-//        Person test2 =  RedisUtil.get("123");
-//        System.out.println(test2);
-        RedisUtil.set("test","hello");
+        boolean set = RedisUtil.set("123", person);
+        System.out.println(set);
+        Person test2 =  RedisUtil.get("123");
+        System.out.println(test2);
+        RedisUtil.set("test", "hello1");
         String he = RedisUtil.get("test");
         System.out.println(he);
     }
 
     /**
-     *  存储pojo形式的  hash结构
+     * 存储pojo形式的  hash结构
      */
     @Test
-    public void redisHash(){
-        boolean hash_pojo = RedisUtil.hSetPojo("pojo",pojo);
+    public void redisHash() {
+        boolean hash_pojo = RedisUtil.hSetPojo("pojo", pojo);
         System.out.println(hash_pojo);
-        TestPojo test = RedisUtil.hGetPojo("pojo",TestPojo.class);
+        TestPojo test = RedisUtil.hGetPojo("pojo", TestPojo.class);
         System.out.println(test);
     }
 
     @Test
-    public void redisKeys(){
+    public void redisKeys() {
         Set<String> set = RedisUtil.getRedisTemplate().keys("123");
         System.out.println(set);
     }
 
     /**
-     *  List 操作
+     * List 操作
      */
     @Test
-    public void redisList(){
-        RedisUtil.lSet("list",person);
-        RedisUtil.lSet("list",person);
-        RedisUtil.lSet("list",person);
-        RedisUtil.lSet("list",person);
-        List<Person> list = RedisUtil.lGet("list",0,-1);
+    public void redisList() {
+        RedisUtil.lSet("list", person);
+        RedisUtil.lSet("list", person);
+        RedisUtil.lSet("list", person);
+        RedisUtil.lSet("list", person);
+        List<Person> list = RedisUtil.lGet("list", 0, -1);
         System.out.println();
     }
 
@@ -95,8 +88,8 @@ public class RedisTest {
      * Set 操作
      */
     @Test
-    public void redisSet(){
-        long l = RedisUtil.sSet("set",person,person);
+    public void redisSet() {
+        long l = RedisUtil.sSet("set", person, person);
         System.out.println(l);
 
         Set<Person> set = RedisUtil.sGet("set");

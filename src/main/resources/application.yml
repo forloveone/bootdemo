@@ -14,3 +14,26 @@ spring:
       exclude: WEB-INF/**
   profiles:
     active: dev
+
+# redis 配置
+  redis:
+      #地址
+      host: 127.0.0.1
+      #端口号
+      port: 6379
+      #密码
+      password:
+      #默认数据库
+      database: 1
+      lettuce:
+        #连接池配置
+        pool:
+          #最大连接数
+          max-active: 32
+          #等待时间
+          max-wait: 300ms
+          #最大空闲
+          max-idle: 16
+          #最小空闲
+          min-idle: 8
+      timeout: 100ms
