@@ -30,7 +30,7 @@ public class ThreadFind {
 
     @Test
     public void test() {
-        //37804  200万个耗时
+        //37804  200万个耗时  41031
         long startTime = System.currentTimeMillis();
         Iterator<Integer> iterator = list.iterator();
         while (iterator.hasNext()) {
@@ -45,12 +45,12 @@ public class ThreadFind {
 
     @Test
     public void test2() throws InterruptedException, ExecutionException {
-        //34937 没有想象中的效率提高?
+        //34937 没有想象中的效率提高?  40448
         //首先把list切分成小块,多线程每个线程做删除,最后在合并结果
         long startTime = System.currentTimeMillis();
         List<Integer> listTrue = new ArrayList<>();
         List<List<Integer>> lists = splitList(list, 20000);
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        ExecutorService executorService = Executors.newCachedThreadPool();
         for (List<Integer> list : lists) {
             List<Integer> listTemp = threadFenDan(list,executorService);
             listTrue.addAll(listTemp);
