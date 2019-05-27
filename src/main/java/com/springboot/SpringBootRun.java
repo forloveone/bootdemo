@@ -1,5 +1,6 @@
 package com.springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling //定时任务支持
 @EnableAspectJAutoProxy //aop注解支持
 @EnableAsync //异步任务的支持
+@MapperScan("com.springboot.bussiness.dao")
 public class SpringBootRun {
 
     public static void main(String[] args) {

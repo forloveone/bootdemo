@@ -37,3 +37,15 @@ spring:
           #最小空闲
           min-idle: 8
       timeout: 100ms
+  # mysql 本地源
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    #type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  typeAliasesPackage: com.springboot.bussiness.dao
+  mapperLocations: classpath:com/springboot/bussiness/dao/mapper/*.xml
