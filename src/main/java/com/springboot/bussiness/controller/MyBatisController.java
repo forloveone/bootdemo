@@ -16,11 +16,16 @@ public class MyBatisController {
     private MyBatisService myBatisService;
 
     @RequestMapping("/insert")
-    public void insert(){
+    public void insert() throws Exception {
         User user = new User();
         user.setName("百万");
         user.setPassword("test");
         user.setAddTime(new Date());
         myBatisService.insert(user);
+    }
+
+    @RequestMapping("/callProduce")
+    public void call(){
+        myBatisService.callProduce();
     }
 }

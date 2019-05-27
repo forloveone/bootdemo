@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling //定时任务支持
 @EnableAspectJAutoProxy //aop注解支持
 @EnableAsync //异步任务的支持
-@MapperScan("com.springboot.bussiness.dao")
+@MapperScan("com.springboot.bussiness.dao") //扫描mybatis的接口
 public class SpringBootRun {
 
     public static void main(String[] args) {
@@ -29,13 +29,6 @@ public class SpringBootRun {
     }
 
     private void toDo() {
-        /*
-            集成mybatis 基本操作
-                注解回滚
-         */
-        /*
-            集成redis get 基本操作 配置详解
-         */
         /*
             拦截器 和 Aop 的区别
          */
@@ -83,6 +76,8 @@ public class SpringBootRun {
             git 版本工具
             maven jar包管理工具
             mvc pojo进入代码时的参数校验
+            mybatis
+            redis
          */
     }
 
