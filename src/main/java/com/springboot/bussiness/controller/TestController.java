@@ -4,22 +4,24 @@ import com.springboot.aop.AopBeforeAnnotation;
 import com.springboot.bussiness.pojo.Person;
 import com.springboot.bussiness.pojo.TestPojo;
 import com.springboot.bussiness.service.AsyncServiceTest;
+import com.springboot.bussiness.service.MyBatisService;
 import com.springboot.bussiness.service.PushService;
 import com.springboot.events.EventsTest;
 import com.springboot.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -47,6 +49,9 @@ public class TestController {
 
     @Autowired
     PushService pushService;
+
+    @Autowired
+    private MyBatisService myBatisService;
 
 //    @Autowired
 //    private RedisTemplate redisTemplate;
@@ -128,31 +133,37 @@ public class TestController {
     }
 
     @RequestMapping(value = "/path/{s1}/{s2}")
-    public void pathParam(@PathVariable String s1, @PathVariable String s2){
-        System.out.println(s1+"   "+s2);
+    public void pathParam(@PathVariable String s1, @PathVariable String s2) {
+        System.out.println(s1 + "   " + s2);
     }
 
-    @RequestMapping(value = {"/method1","/method2"})
-    public void testTwo4One(){
+    @RequestMapping(value = {"/method1", "/method2"})
+    public void testTwo4One() {
         System.out.println("testTwo4One");
     }
 
     //想要支持直接返回成xml格式,需要jackson-dataformat-xml 的依赖
-    @RequestMapping(value = "/xml",produces = "application/xml;charset=UTF-8")
+    @RequestMapping(value = "/xml", produces = "application/xml;charset=UTF-8")
     @ResponseBody
-    public TestPojo responseXml(){
-        return new TestPojo(123,123.12,"wangwu",new Date(), new BigDecimal("11.1"));
+    public TestPojo responseXml() {
+        return new TestPojo(123, 123.12, "wangwu", new Date(), new BigDecimal("11.1"));
     }
 
     //默认返回的就是json 格式的数据
-    @RequestMapping(value = "/json",produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/json", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public TestPojo responseJson(){
-        return new TestPojo(11,11.1,"wangwu",new Date(), new BigDecimal("11.1"));
+    public TestPojo responseJson() {
+        return new TestPojo(11, 11.1, "wangwu", new Date(), new BigDecimal("11.1"));
     }
 
     @RequestMapping("/defer")
-    public DeferredResult<String> deferredCall(){
+    public DeferredResult<String> deferredCall() {
         return pushService.getAsyncUpdate();
+    }
+
+    //对于非幂等的请求（比如新增，更新操作），千万不要使用重试
+    @RequestMapping("retry")
+    public void retry(){
+        myBatisService.retryTest();
     }
 }

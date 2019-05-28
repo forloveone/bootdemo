@@ -9,4 +9,6 @@ public interface MyBatisService {
      * 调用存储过程
      */
     void callProduce();
+
+    void retryTest();
 }
