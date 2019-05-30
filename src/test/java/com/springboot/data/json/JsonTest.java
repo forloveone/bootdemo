@@ -3,8 +3,6 @@ package com.springboot.data.json;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.springboot.pojo.RequestPojo;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,28 +19,6 @@ public class JsonTest {
     public void before() {
         pojo.setAddress("hahha");
         pojo.setName("kjjl");
-    }
-
-    /**
-     * Gson 转换json
-     * toJson
-     * fromJson
-     */
-    @Test
-    public void GsonTest() {
-        Gson json = new Gson();
-        String t = json.toJson(pojo);
-        System.out.println(t);
-
-        String test = "{\"name\":\"kjjl\",\"address\":\"hahha\"}";
-        RequestPojo entity = json.fromJson(test, RequestPojo.class);
-        System.out.println(entity);
-
-        //List 套 实体类
-        String josn2 = "[{\"name\":\"kjjl\",\"address\":\"hahha\"},{\"name\":\"哈哈\",\"address\":\"test\"}]";
-        List<RequestPojo> me = json.fromJson(josn2, new TypeToken<List<RequestPojo>>() {
-        }.getType());
-        System.out.println("转集合me:" + me);
     }
 
     /**
