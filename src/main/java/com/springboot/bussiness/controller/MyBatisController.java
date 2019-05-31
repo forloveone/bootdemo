@@ -28,4 +28,9 @@ public class MyBatisController {
     public void call(){
         myBatisService.callProduce();
     }
+
+    @RequestMapping("/batchInsert")
+    public void batchInsert(){
+        myBatisService.batchInsert();
+    }
 }

@@ -42,4 +42,13 @@ public class User {
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
+
+    public User(String name, String password, Date addTime) {
+        this.name = name;
+        this.password = password;
+        this.addTime = addTime;
+    }
+
+    public User() {
+    }
 }

@@ -83,4 +83,12 @@
     <select id="callTest" resultMap="BaseResultMap">
         call procedureDemo;
     </select>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into usertest (id, name, password,add_time)
+        values
+        <foreach collection="list" item="user" index="index" separator=",">
+            (#{user.id}, #{user.name}, #{user.password},#{user.addTime})
+        </foreach>
+    </insert>
 </mapper>

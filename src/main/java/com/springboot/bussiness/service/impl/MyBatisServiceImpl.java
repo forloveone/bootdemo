@@ -11,6 +11,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,6 +47,22 @@ END
         System.out.println("retry");
         throw new RemoteAccessException("异常需要重试");
     }
+
+    /**
+     * 这种批量插入比for循环中单条插入,每百条提交一次性能好的多,尤其在数据量很大的时候,
+     * mysql默认接受sql的大小是1048576(1M)，若数据量(sql太长导致)超过1M会报如下异常：Packet for query is too large
+     * （可通过调整MySQL安装目录下的my.ini文件中[mysqld]段的＂max_allowed_packet = 1M＂）
+     */
+    @Override
+    public void batchInsert() {
+        List<User> list = new ArrayList<>();
+        User u1 = new User("batch1","batchPassword1",new Date());
+        User u2 = new User("batch2","batchPassword2",new Date());
+        list.add(u1);
+        list.add(u2);
+        boolean flag = userMapper.batchInsert(list);
+    }
+
     @Recover
     //当重试到达指定次数时，被注解的方法将被回调，可以在该方法中进行日志处理。需要注意的是发生的异常和入参类型一致时才会回调
     public void recover(RemoteAccessException e) {

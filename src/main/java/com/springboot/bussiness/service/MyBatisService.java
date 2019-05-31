@@ -11,4 +11,6 @@ public interface MyBatisService {
     void callProduce();
 
     void retryTest();
+
+    void batchInsert();
 }
