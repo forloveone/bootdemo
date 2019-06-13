@@ -1,6 +1,5 @@
 package com.springboot.aop;
 
-import com.springboot.bussiness.pojo.Person;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -37,7 +36,7 @@ public class AspectJTest {
     public void annotation(JoinPoint point) {
         //aop 获得入参参数
         Object[] args = point.getArgs();
-        String s = ((Person) args[0]).toString();
+//        String s = ((Person) args[0]).toString();
 
         MethodSignature signature = (MethodSignature)point.getSignature();
         Method method = signature.getMethod();

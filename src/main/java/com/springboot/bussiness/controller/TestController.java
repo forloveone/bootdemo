@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -78,7 +75,8 @@ public class TestController {
     }
 
     @AopBeforeAnnotation(name = "基于注解的aop")
-    @RequestMapping("/test5")
+    @RequestMapping(value = "/test5", method = RequestMethod.POST)
+    @ResponseBody
     public ModelAndView test5(@Validated Person person, BindingResult br) {
         ModelAndView mv = new ModelAndView();
         List<ObjectError> allErrors = br.getAllErrors();
@@ -163,7 +161,17 @@ public class TestController {
 
     //对于非幂等的请求（比如新增，更新操作），千万不要使用重试
     @RequestMapping("retry")
-    public void retry(){
+    public void retry() {
         myBatisService.retryTest();
+    }
+
+    @RequestMapping("getParam")
+    public void getParam(String name, int age) {
+        System.out.println("姓名是" + name + "\n" + "年龄是" + age);
+    }
+
+    @RequestMapping("testHttpclient")
+    public void testHttpclient(@RequestBody Person person, String name) {
+        System.out.println(person);
     }
 }
