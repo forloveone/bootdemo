@@ -28,13 +28,21 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 public class AppacheCommonsTest {
@@ -85,17 +93,167 @@ public class AppacheCommonsTest {
         System.out.println(str2);
     }
 
-    /**
-     * 信息摘要算法
-     */
     @Test
-    public void md5AndSha1() {
+    public void md5AndSha1() throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException, IOException {
+        //信息摘要算法 单项加密算法
         String str = "和咯就看见了 test asdfb !@ 123";
         String st2 = DigestUtils.md5Hex(str);
         System.out.println(st2);
 
         String st3 = DigestUtils.sha1Hex(str);
         System.out.println(st3);
+
+
+    }
+
+    /**
+     * 对称加密算法 单密匙加密(同一个密匙既可以用来加密也可以解密)
+     * DES 已经不安全了 密码长度应该是8的倍数
+     */
+    @Test
+    public void des() throws Exception {
+        String secret = "88888888";
+        Cipher cipher = Cipher.getInstance("DES");
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(secret.getBytes("utf-8"), "DES"));
+        //加密数据
+        byte[] encryData = cipher.doFinal("我们是中国爱看啥积分大口径卡1213!2@@".getBytes("utf-8"));
+        //加密后字符串
+        String scretiString = jdkBase64String(encryData);
+        System.out.println(scretiString);
+
+        //解密必须另外构造一个Cipher 否则解不了
+        Cipher cipher2 = Cipher.getInstance("DES");
+        cipher2.init(Cipher.DECRYPT_MODE, new SecretKeySpec(secret.getBytes("utf-8"), "DES"));
+        byte[] temp = jdkBase64Decoder(scretiString);
+        byte[] de = cipher2.doFinal(temp);
+        System.out.println(new String(de, "utf-8"));
+    }
+
+    /**
+     * pbe 也是对称加密算法
+     * https://blog.csdn.net/happylee6688/article/details/44650517
+     */
+    @Test
+    public void pbe(){
+    }
+
+    /**
+     * aes 也是对称加密算法 密匙长度为 32的倍数
+     */
+    @Test
+    public void aes() throws Exception {
+        //AES 32的倍数
+        String secret = "88888888888888888888888888888888";
+        byte[] encryData = encrypt("我忙卡死机好地方!@#qwe`~",secret);
+        //加密后字符串
+        //传输过程,不转成16进制的字符串，就等着程序崩溃掉吧
+        String code = parseByte2HexStr(encryData);
+        System.out.println(code);
+
+        byte[] decode = parseHexStr2Byte(code);
+        byte[] de = decrypt(decode,secret);
+        System.out.println(new String(de, "utf-8"));
+    }
+
+    /**
+     * 加密 aes
+     *
+     * @param content
+     *            需要加密的内容
+     * @param password
+     *            加密密码
+     * @return
+     */
+    public static byte[] encrypt(String content, String password) {
+        try {
+            KeyGenerator kgen = KeyGenerator.getInstance("AES");
+            kgen.init(128, new SecureRandom(password.getBytes()));
+            SecretKey secretKey = kgen.generateKey();
+            byte[] enCodeFormat = secretKey.getEncoded();
+            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
+            Cipher cipher = Cipher.getInstance("AES");// 创建密码器
+            byte[] byteContent = content.getBytes("utf-8");
+            cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化
+            byte[] result = cipher.doFinal(byteContent);
+            return result; // 加密
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 解密 aes
+     *
+     * @param content
+     *            待解密内容
+     * @param password
+     *            解密密钥
+     * @return
+     */
+    public static byte[] decrypt(byte[] content, String password) {
+        try {
+            KeyGenerator kgen = KeyGenerator.getInstance("AES");
+            kgen.init(128, new SecureRandom(password.getBytes()));
+            SecretKey secretKey = kgen.generateKey();
+            byte[] enCodeFormat = secretKey.getEncoded();
+            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
+            Cipher cipher = Cipher.getInstance("AES");// 创建密码器
+            cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
+            byte[] result = cipher.doFinal(content);
+            return result; // 加密
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将16进制转换为二进制
+     */
+    public byte[] parseHexStr2Byte(String hexStr) {
+        if (hexStr.length() < 1)
+            return null;
+        byte[] result = new byte[hexStr.length() / 2];
+        for (int i = 0; i < hexStr.length() / 2; i++) {
+            int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);
+            int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16);
+            result[i] = (byte) (high * 16 + low);
+        }
+        return result;
+    }
+
+    /**
+     * 将二进制转换成16进制
+     */
+    public String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 使用base64解决乱码
+     *
+     * @param secretKey 加密后的字节码
+     */
+    public String jdkBase64String(byte[] secretKey) {
+        BASE64Encoder encoder = new BASE64Encoder();
+        return encoder.encode(secretKey);
+    }
+
+    /**
+     * 使用jdk的base64 解密字符串 返回为null表示解密失败
+     */
+    public byte[] jdkBase64Decoder(String str) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        return decoder.decodeBuffer(str);
     }
 
     /**
@@ -297,7 +455,7 @@ public class AppacheCommonsTest {
 
 //        //Post请求 有参数 (支持普通参数,对象参数,对象参数和普通参数都有 等情况)
 //        HttpPost httpPost = new HttpPost("http://localhost:12345/doPostControllerFour" + "?" + sb);
-        HttpPost httpPost = new HttpPost("http://localhost:9091/demo/testController/testHttpclient"+"?"+"name=test");
+        HttpPost httpPost = new HttpPost("http://localhost:9091/demo/testController/testHttpclient" + "?" + "name=test");
         Gson gson = new Gson();
         com.springboot.bussiness.pojo.Person person = new com.springboot.bussiness.pojo.Person();
         person.setAddress("123");
