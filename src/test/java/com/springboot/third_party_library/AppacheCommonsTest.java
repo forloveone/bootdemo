@@ -39,10 +39,10 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 
 public class AppacheCommonsTest {
@@ -134,7 +134,7 @@ public class AppacheCommonsTest {
      * https://blog.csdn.net/happylee6688/article/details/44650517
      */
     @Test
-    public void pbe(){
+    public void pbe() {
     }
 
     /**
@@ -144,24 +144,60 @@ public class AppacheCommonsTest {
     public void aes() throws Exception {
         //AES 32的倍数
         String secret = "88888888888888888888888888888888";
-        byte[] encryData = encrypt("我忙卡死机好地方!@#qwe`~",secret);
+        byte[] encryData = encrypt("我忙卡死机好地方!@#qwe`~", secret);
         //加密后字符串
         //传输过程,不转成16进制的字符串，就等着程序崩溃掉吧
         String code = parseByte2HexStr(encryData);
         System.out.println(code);
 
         byte[] decode = parseHexStr2Byte(code);
-        byte[] de = decrypt(decode,secret);
+        byte[] de = decrypt(decode, secret);
         System.out.println(new String(de, "utf-8"));
+    }
+
+    /**
+     * 非对称加密算法(安全性高,消耗大效率慢) 两个密匙一个公开,一个私有.
+     * 公匙用来加密数据,私匙用来解密
+     * 一般client持有公匙,服务器持有私匙
+     * 也可用来交换密匙(对称的密匙)
+     */
+    @Test
+    public void rsa() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(1023);
+
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+        //公匙
+        byte[] publicKey = keyPair.getPublic().getEncoded();
+        //私匙
+        byte[] pirvateKey = keyPair.getPrivate().getEncoded();
+        System.out.println(parseByte2HexStr(publicKey));
+        System.out.println(parseByte2HexStr(pirvateKey));
+
+        //使用公匙加密
+        Key rsa = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(publicKey));
+        Cipher cipher = Cipher.getInstance(KeyFactory.getInstance("RSA").getAlgorithm());
+        cipher.init(Cipher.ENCRYPT_MODE, rsa);
+        String test = "helolkj 我也卡打飞机12!@#";
+        byte[] encydata = cipher.doFinal(test.getBytes());
+        System.out.println(parseByte2HexStr(encydata));
+
+        //使用私匙解密
+        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(pirvateKey);
+        KeyFactory factory = KeyFactory.getInstance("RSA");
+        Key privateKeys = factory.generatePrivate(pkcs8EncodedKeySpec);
+
+        Cipher cipher2 = Cipher.getInstance(factory.getAlgorithm());
+        cipher2.init(Cipher.DECRYPT_MODE, privateKeys);
+        byte[] bytes = cipher2.doFinal(encydata);
+        System.out.println(new String(bytes));
     }
 
     /**
      * 加密 aes
      *
-     * @param content
-     *            需要加密的内容
-     * @param password
-     *            加密密码
+     * @param content  需要加密的内容
+     * @param password 加密密码
      * @return
      */
     public static byte[] encrypt(String content, String password) {
@@ -185,10 +221,8 @@ public class AppacheCommonsTest {
     /**
      * 解密 aes
      *
-     * @param content
-     *            待解密内容
-     * @param password
-     *            解密密钥
+     * @param content  待解密内容
+     * @param password 解密密钥
      * @return
      */
     public static byte[] decrypt(byte[] content, String password) {

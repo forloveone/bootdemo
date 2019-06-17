@@ -12,4 +12,6 @@ public class JsonF {
     private int fAge;
 
     private String type;
+
+    public String faddress;
 }
