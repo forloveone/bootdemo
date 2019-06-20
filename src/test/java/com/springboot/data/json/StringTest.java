@@ -259,4 +259,50 @@ public class StringTest {
         String f = new String(c.getBytes("iso-8859-1"), "utf-8");
         System.out.println(f);
     }
+
+    /**
+     * IP 其实是一个整数类型,所以mysql存储的时候用整形.
+     */
+    @Test
+    public void ip(){
+        long ipConvertNum = getIpConvertNum("255.255.255.2");
+        System.out.println(ipConvertNum);
+        String numConvertIp = getNumConvertIp(ipConvertNum);
+        System.out.println(numConvertIp);
+    }
+
+    /**
+     * 将数字转成ip地址
+     *
+     */
+    public static String getNumConvertIp(long ipLong) {
+        long mask[] = { 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 };
+        long num = 0;
+        StringBuffer ipInfo = new StringBuffer();
+        for (int i = 0; i < 4; i++) {
+            num = (ipLong & mask[i]) >> (i * 8);
+            if (i > 0)
+                ipInfo.insert(0, ".");
+            ipInfo.insert(0, Long.toString(num, 10));
+        }
+        return ipInfo.toString();
+    }
+
+    /**
+     * 将ip 地址转换成数字
+     *
+     * @param ipAddress
+     *            传入的ip地址
+     * @return 转换成数字类型的ip地址
+     */
+    public static long getIpConvertNum(String ipAddress) {
+        String[] ip = ipAddress.split("\\.");
+        long a = Integer.parseInt(ip[0]);
+        long b = Integer.parseInt(ip[1]);
+        long c = Integer.parseInt(ip[2]);
+        long d = Integer.parseInt(ip[3]);
+
+        long ipNum = a * 256 * 256 * 256 + b * 256 * 256 + c * 256 + d;
+        return ipNum;
+    }
 }

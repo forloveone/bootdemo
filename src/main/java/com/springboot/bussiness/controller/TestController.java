@@ -8,6 +8,9 @@ import com.springboot.bussiness.service.MyBatisService;
 import com.springboot.bussiness.service.PushService;
 import com.springboot.events.EventsTest;
 import com.springboot.utils.DateUtil;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -174,4 +177,30 @@ public class TestController {
     public void testHttpclient(@RequestBody Person person, String name) {
         System.out.println(person);
     }
+
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
+
+    @RequestMapping("serderToRabbitMQ")
+    public void sendMQ() {
+        String context = "hello " + new Date();
+        //单生产者 queue
+        rabbitTemplate.convertAndSend("hello", context);
+    }
+
+    //多个生产者会 自动分发
+    @RabbitListener(queues = "hello")
+    @RabbitHandler
+    public void reciver(String data) {
+        System.out.println("reciver" + data);
+    }
+
+    @RabbitListener(queues = "hello")
+    @RabbitHandler
+    public void reciver2(String data) {
+        System.out.println("reciver2" + data);
+    }
+
+    //rebbitmq topic
+
 }
