@@ -1,6 +1,5 @@
 package com.springboot.thread;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -18,13 +17,13 @@ public class RemoveIntger2Thread implements Callable<List> {
 
     @Override
     public List call() throws Exception {
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Integer next = iterator.next();
-            if (next == 2) {
-                iterator.remove();
-            }
-        }
+//        while (iterator.hasNext()) {
+//            Integer next = iterator.next();
+//            if (next == 2) {
+//                iterator.remove();
+//            }
+//        }
+        list.removeIf(next -> next == 2);
         return list;
     }
 }

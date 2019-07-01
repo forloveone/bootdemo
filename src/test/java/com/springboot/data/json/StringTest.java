@@ -243,6 +243,9 @@ public class StringTest {
         System.out.println(StringUtils.isNotBlank(test));
 
         System.out.println(StringUtils.rightPad(StringUtils.left(name, 1), StringUtils.length(name), "*"));
+
+        String s = StringUtils.rightPad("12", 36, "1");
+        System.out.println(s);
     }
 
     /**

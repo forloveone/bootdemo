@@ -1,11 +1,8 @@
 package com.springboot.collection;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.util.unit.DataUnit;
 
-import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -101,7 +98,6 @@ public class ListTest {
 
     /**
      * 迭代中remove元素
-     * 循环删除list中特定一个元素的，可以使用三种方式中的任意一种，但在使用中要注意上面分析的各个问题
      * 循环删除list中多个元素的，应该使用迭代器iterator方式。
      */
     @Test

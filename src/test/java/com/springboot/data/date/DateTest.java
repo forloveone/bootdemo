@@ -1,6 +1,7 @@
 package com.springboot.data.date;
 
 import com.springboot.utils.DateUtil;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
@@ -33,6 +34,8 @@ public class DateTest {
     @Test
     public void test2() throws ParseException {
         Date date = DateUtils.parseDate("1990-12-01", "yyyy-MM-dd");
+        String yyyy年MM月dd日 = DateFormatUtils.format(new Date(), "yyyy年MM月dd日");
+        System.out.println(yyyy年MM月dd日);
         System.out.println(date);
     }
 

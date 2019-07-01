@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
-public class ThreadTest {
-    ThreadLocal<Map> local = new ThreadLocal<>();
+public class ThreadPojo {
+    ThreadLocal<Map> threadPrivateMap = new ThreadLocal<>();
     private String name;
 }
