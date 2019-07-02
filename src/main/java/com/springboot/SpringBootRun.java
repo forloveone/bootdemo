@@ -67,9 +67,6 @@ public class SpringBootRun {
         /*
             分布式session原理
          */
-        /*
-            批处理的概念,是一次执行多条语句吗?
-         */
     }
 
     private void 存在特性() {
@@ -91,7 +88,7 @@ public class SpringBootRun {
         //RabitMQ quartz
         //jekuns 自动发布
         //sonar 代码审查
-
+        //Junit 单元测试 PowerMock
         //springcloud
     }
 

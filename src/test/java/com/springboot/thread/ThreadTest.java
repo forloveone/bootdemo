@@ -221,7 +221,12 @@ public class ThreadTest {
         // 每个线程使用await()方法告诉CyclicBarrier我已经到达了屏障，然后当前线程被阻塞。
         //CyclicBarrier的另一个构造函数CyclicBarrier(int parties, Runnable barrierAction)，
         // 用于线程到达屏障时，优先执行barrierAction，方便处理更复杂的业务场景。
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("test");
+            }
+        });
         for (int i = 0; i < 3; i++) {
             Worker worker = new Worker(cyclicBarrier);
             worker.start();
@@ -236,10 +241,12 @@ public class ThreadTest {
     public void countDownLatch() {
 //    public static void main(String[] args) {
         CountDownLatch count = new CountDownLatch(2);
-
+//        CountDownLatch可以唤起多个任务,CountDownLatch不可重用，计数值为0该CountDownLatch就不可再用了
         Boss4CountDownLatch boss = new Boss4CountDownLatch(count, "boss");
+        Boss4CountDownLatch bossWife = new Boss4CountDownLatch(count, "boss wife");
+        bossWife.start();
         boss.start();
-
+        //CountDownLatch线程运行到某个点上之后，只是给某个数值-1而已，该线程继续运行
         Worker4CountDownLatch wor1 = new Worker4CountDownLatch(count, "work1");
         Worker4CountDownLatch wor2 = new Worker4CountDownLatch(count, "work2");
         wor1.start();
@@ -495,6 +502,7 @@ public class ThreadTest {
     }
 
     public static void main(String[] args) throws InterruptedException {
+//    public void reentrantLock() throws InterruptedException{
         Thread t1 = new Thread() {
             @Override
             public void run() {
@@ -521,5 +529,20 @@ public class ThreadTest {
     @Test
     public void thisOutSide(){
 
+    }
+
+    @Test
+    public void threadCollection() throws InterruptedException {
+        //hashMap的线程安全版本
+        ConcurrentHashMap map = new ConcurrentHashMap();
+        map.put("1","map1");
+        map.put("2","map1");
+        map.put("3","map1");
+        map.put("4","map1");
+
+        CopyOnWriteArrayList list = new CopyOnWriteArrayList();
+        list.add("1");
+        list.add("2");
+        list.add("3");
     }
 }
