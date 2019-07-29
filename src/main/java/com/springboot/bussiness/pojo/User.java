@@ -11,6 +11,16 @@ public class User {
 
     private Date addTime;
 
+    private String timeTemp;
+
+    public String getTimeTemp() {
+        return timeTemp;
+    }
+
+    public void setTimeTemp(String timeTemp) {
+        this.timeTemp = timeTemp;
+    }
+
     public Long getId() {
         return id;
     }
