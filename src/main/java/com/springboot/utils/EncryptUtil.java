@@ -1,5 +1,7 @@
 package com.springboot.utils;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.security.MessageDigest;
 
 //
@@ -36,5 +38,14 @@ public class EncryptUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     *  apache md5 加密方式
+     * @param str 需要加密String
+     * @return MD5加密串
+     */
+    public static String md5(String str){
+        return DigestUtils.md5Hex(str);
     }
 }

@@ -1,5 +1,6 @@
 package com.test.collection;
 
+import com.test.pojo.pojosort.Person;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,6 +68,36 @@ public class ListTest {
         for (String strs : str2) {
             System.out.println(strs);
         }
+    }
+
+    /**
+     *  对list<pojo>去重 需要pojo 重写hashcode和equals
+     */
+    @Test
+    public void testPojo(){
+        List<Person> personList = new ArrayList<>();
+        Person p1 = new Person();
+        p1.setAge(10);
+        Person p2 = new Person();
+        p2.setAge(11);
+        Person p3 = new Person();
+        p3.setAge(6);
+        Person p4 = new Person();
+        p4.setAge(6);
+        personList.add(p1);
+        personList.add(p2);
+        personList.add(p3);
+        personList.add(p4);
+
+        System.out.println(p1.compareTo(p2));
+        System.out.println(p1.compareTo(p3));
+        System.out.println(p3.compareTo(p1));
+        Collections.sort(personList);
+        System.out.println(personList);
+
+        //去重后的list
+        List<Person> listTrue = new ArrayList(new HashSet(personList));
+        System.out.println(listTrue);
     }
 
     //判断数组中是否包含给定字符串

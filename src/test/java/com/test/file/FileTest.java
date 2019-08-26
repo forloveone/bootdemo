@@ -47,7 +47,6 @@ public class FileTest {
 
     /**
      * 创建txt 文件并写入内容,做a|b|c 格式化传递数据时使用的..
-     *
      */
     @Test
     public void writeFile() throws IOException {
@@ -65,5 +64,24 @@ public class FileTest {
 
         //使用完删除
         file.delete();
+    }
+
+    @Test
+    public void testCreateFile() throws IOException {
+        //这段代码，会创建文件夹 E:\\a\\aa\\aaa.txt\
+//        String strPath = "E:\\a\\aa\\aaa.txt";
+//        File file = new File(strPath);
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+
+        //正确写法
+        String strPath = "E:\\a\\aa\\aaa.txt";
+        File file = new File(strPath);
+        File fileParent = file.getParentFile();
+        if (!fileParent.exists()) {
+            fileParent.mkdirs();
+        }
+        file.createNewFile();
     }
 }

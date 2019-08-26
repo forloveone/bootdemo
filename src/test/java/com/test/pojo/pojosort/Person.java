@@ -6,16 +6,17 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * 要实现javaPojo对象的排序(使用java提供的工具类)
  * 方式一:实现Comparable接口,实现CompareTo方法
  * 方式二:自定义比较器,实现Comparator接口,实现Compare方法
- *
- *         Collections.sort(personList);
- *
- *  推荐使用第二种 可以直接使用sort方法 而不用Collections的方法,而且不用重写许多方法 更简洁
+ * <p>
+ * Collections.sort(personList);
+ * <p>
+ * 推荐使用第二种 可以直接使用sort方法 而不用Collections的方法,而且不用重写许多方法 更简洁
  */
 @Data
 public class Person implements Comparable<Person> {
@@ -60,14 +61,21 @@ public class Person implements Comparable<Person> {
         p2.setAge(11);
         Person p3 = new Person();
         p3.setAge(6);
+        Person p4 = new Person();
+        p4.setAge(6);
         personList.add(p1);
         personList.add(p2);
         personList.add(p3);
+        personList.add(p4);
 
         System.out.println(p1.compareTo(p2));
         System.out.println(p1.compareTo(p3));
         System.out.println(p3.compareTo(p1));
         Collections.sort(personList);
         System.out.println(personList);
+
+        //去重后的list
+        List<Person> listTrue = new ArrayList(new HashSet(personList));
+        System.out.println(listTrue);
     }
 }
