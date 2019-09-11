@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * 应对一个需求
@@ -44,11 +45,10 @@ public class Fanxing {
 
     }
 
-    @Test
     /**
      * 反射获得一个属性的值
      */
-    public <T> void reflect(T obj) throws Exception{
+    private <T> void reflect(T obj) throws Exception{
         Field field = obj.getClass().getDeclaredField("name");
         field.setAccessible(true);
         Object val = field.get(obj);
@@ -66,5 +66,10 @@ public class Fanxing {
         System.out.println(PropertyUtils.getProperty(obj, "age"));
         System.out.println(BeanUtils.getProperty(obj, "name"));
 //        sb.append("<a>" + obj.getName() + "</a>");
+    }
+
+    @Test
+    public void test2() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        System.out.println(BeanUtils.getProperty(student, "age"));
     }
 }
