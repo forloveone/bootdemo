@@ -94,7 +94,7 @@ public class AppacheCommonsTest {
     }
 
     @Test
-    public void md5AndSha1() throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, BadPaddingException, IllegalBlockSizeException, IOException {
+    public void md5AndSha1() throws Exception {
         //信息摘要算法 单项加密算法
         String str = "和咯就看见了 test asdfb !@ 123";
         String st2 = DigestUtils.md5Hex(str);
@@ -103,7 +103,8 @@ public class AppacheCommonsTest {
         String st3 = DigestUtils.sha1Hex(str);
         System.out.println(st3);
 
-
+        String sha256Hex = DigestUtils.sha256Hex(str);
+        System.out.println(sha256Hex);
     }
 
     /**

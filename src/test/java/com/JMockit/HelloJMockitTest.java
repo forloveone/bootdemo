@@ -305,6 +305,8 @@ public class HelloJMockitTest {
 
     /**
      * 如果想根据入参，返回结果的内容，怎么办呢
+     *
+     * 也可以根据入参做不同的调用,返回不同的值
      */
     @Test
     public void testDelegate() {

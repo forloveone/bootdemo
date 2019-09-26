@@ -6,6 +6,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 /**
  * Redis 做分布式锁，利用 redis的setnx（SET if Not eXists）命令 和 getset 命令，
  * 即下面代码中的方法 setIfAbsent 和 getAndSet
+ *
+ * 这个是悲观锁
  */
 public class RedisLock {
 
@@ -28,7 +30,8 @@ public class RedisLock {
         //获取key的值，判断是是否超时
         String curVal = redisTemplate.opsForValue().get(key);
         if (StringUtils.isNotEmpty(curVal) && Long.parseLong(curVal) < System.currentTimeMillis()) {
-            //获得之前的key值，同时设置当前的传入的value。这个地方可能几个线程同时过来，但是redis本身天然是单线程的，所以getAndSet方法还是会安全执行，
+            //没有超时
+            //这个地方可能几个线程同时过来，但是redis本身天然是单线程的，所以getAndSet方法还是会安全执行，
             //首先执行的线程，此时curVal当然和oldVal值相等，因为就是同一个值，之后该线程set了自己的value，后面的线程就取不到锁了
             String oldVal = redisTemplate.opsForValue().getAndSet(key, value);
             if (StringUtils.isNotEmpty(oldVal) && oldVal.equals(curVal)) {
