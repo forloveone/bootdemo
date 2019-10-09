@@ -291,19 +291,42 @@ public class ThreadTest {
     }
 
     /**
+     * 死锁简单示例
      * 两个线程里面分别持有两个Object对象 ,并请求对方的对象
      * 这个例子线程1一直没有释放锁,并请求锁2,线程2持有锁2并请求锁1,造成死锁
+     * 线程 dump 信息
+     * "Thread B" #13 prio=5 os_prio=0 tid=0x000000001a8b3800 nid=0xc60 waiting for monitor entry [0x000000001b46f000]
+     *    java.lang.Thread.State: BLOCKED (on object monitor)
+     *         at com.test.thread.ThreadTest.dead1(ThreadTest.java:330)
+     *         - waiting to lock <0x00000000d64c4428> (a java.lang.Object)
+     *         at com.test.thread.ThreadTest.dead2(ThreadTest.java:339)
+     *         - locked <0x00000000d64c4438> (a java.lang.Object)
+     *         at com.test.thread.ThreadTest$7.run(ThreadTest.java:318)
+     *
+     *    Locked ownable synchronizers:
+     *         - None
+     *
+     * "Thread A" #12 prio=5 os_prio=0 tid=0x000000001a8b3000 nid=0xaec waiting for monitor entry [0x000000001b36f000]
+     *    java.lang.Thread.State: BLOCKED (on object monitor)
+     *         at com.test.thread.ThreadTest.dead2(ThreadTest.java:338)
+     *         - waiting to lock <0x00000000d64c4438> (a java.lang.Object)
+     *         at com.test.thread.ThreadTest.dead1(ThreadTest.java:332)
+     *         - locked <0x00000000d64c4428> (a java.lang.Object)
+     *         at com.test.thread.ThreadTest$6.run(ThreadTest.java:305)
+     *
+     *    Locked ownable synchronizers:
+     *         - None
+     *
      */
 //    @Test
-    public void deadLock() {
-//    public static void main(String[] args) {
+//    public void deadLock() {
+    public static void main(String[] args) {
 
-        Thread t1 = new Thread() {
+        Thread t1 = new Thread("Thread A") {
             @Override
             public void run() {
                 try {
                     dead1(this.getName());
-                    dead2(this.getName());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -311,12 +334,11 @@ public class ThreadTest {
         };
         t1.start();
 
-        Thread t2 = new Thread() {
+        Thread t2 = new Thread("Thread B") {
             @Override
             public void run() {
                 try {
                     dead2(this.getName());
-                    dead1(this.getName());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -328,16 +350,15 @@ public class ThreadTest {
     public static void dead1(String name) throws InterruptedException {
         synchronized (obj) {
             System.out.println(name + "获得第一个锁");
-            while (true) {
-
-            }
-//            Thread.sleep(2000);
+            //想持有第二个锁
+            dead2(name);
         }
     }
 
     public static void dead2(String name) throws InterruptedException {
         synchronized (obj2) {
             System.out.println(name + "获得第二个锁");
+            dead1(name);
         }
     }
 
@@ -626,8 +647,8 @@ public class ThreadTest {
      * <p>
      * 如果一个线程想执行exchange() 它会一直等待第二个线程也执行exchange方法.
      */
-    public static void main(String[] args) {
-//    public void exchanger(){
+//    public static void main(String[] args) {
+    public void exchanger(){
         pool.submit(new Thread(new A()));
         pool.submit(new Thread(new B()));
         pool.shutdown();
