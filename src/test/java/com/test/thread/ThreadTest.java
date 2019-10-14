@@ -155,112 +155,6 @@ public class ThreadTest {
         mainMap.get("1");
     }
 
-    // 自定义工作线程
-    private static class Worker extends Thread {
-        private CyclicBarrier cyclicBarrier;
-
-        public Worker(CyclicBarrier cyclicBarrier) {
-            this.cyclicBarrier = cyclicBarrier;
-        }
-
-        @Override
-        public void run() {
-            try {
-                System.out.println(Thread.currentThread().getName() + "开始等待其他线程");
-                cyclicBarrier.await();
-                System.out.println(Thread.currentThread().getName() + "开始执行");
-                // 工作线程开始处理，这里用Thread.sleep()来模拟业务处理
-                Thread.sleep(1000);
-                System.out.println(Thread.currentThread().getName() + "执行完毕");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static class Worker4CountDownLatch extends Thread {
-        private CountDownLatch countDownLatch;
-
-        public Worker4CountDownLatch(CountDownLatch countDownLatch, String name) {
-            super(name);
-            this.countDownLatch = countDownLatch;
-        }
-
-        @Override
-        public void run() {
-            try {
-                System.out.println(Thread.currentThread().getName() + "开始工作");
-                // 工作线程开始处理，这里用Thread.sleep()来模拟业务处理
-                Thread.sleep(1000);
-                System.out.println(Thread.currentThread().getName() + "工作完毕");
-                countDownLatch.countDown();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static class Boss4CountDownLatch extends Thread {
-        private CountDownLatch countDownLatch;
-
-        public Boss4CountDownLatch(CountDownLatch countDownLatch, String name) {
-            super(name);
-            this.countDownLatch = countDownLatch;
-        }
-
-        @Override
-        public void run() {
-            try {
-                System.out.println(Thread.currentThread().getName() + "开始等待工人完成");
-                countDownLatch.await();
-                System.out.println(Thread.currentThread().getName() + "开始检查");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * CyclicBarrier 循环障碍 简单示例
-     */
-    public void cyclicBarrier() {
-//    public static void main(String[] args) {
-        //CyclicBarrier默认的构造方法是CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，
-        // 每个线程使用await()方法告诉CyclicBarrier我已经到达了屏障，然后当前线程被阻塞。
-        //CyclicBarrier的另一个构造函数CyclicBarrier(int parties, Runnable barrierAction)，
-        // 用于线程到达屏障时，优先执行barrierAction，方便处理更复杂的业务场景。
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("test");
-            }
-        });
-        for (int i = 0; i < 3; i++) {
-            Worker worker = new Worker(cyclicBarrier);
-            worker.start();
-        }
-    }
-
-    /**
-     * 简单CountDownLatch 例子
-     */
-    //test运行不正确,需要使用main方法测试
-    //    @Test
-    public void countDownLatch() {
-//    public static void main(String[] args) {
-        CountDownLatch count = new CountDownLatch(2);
-//        CountDownLatch可以唤起多个任务,CountDownLatch不可重用，计数值为0该CountDownLatch就不可再用了
-        Boss4CountDownLatch boss = new Boss4CountDownLatch(count, "boss");
-        Boss4CountDownLatch bossWife = new Boss4CountDownLatch(count, "boss wife");
-        bossWife.start();
-        boss.start();
-        //CountDownLatch线程运行到某个点上之后，只是给某个数值-1而已，该线程继续运行
-        Worker4CountDownLatch wor1 = new Worker4CountDownLatch(count, "work1");
-        Worker4CountDownLatch wor2 = new Worker4CountDownLatch(count, "work2");
-        wor1.start();
-        wor2.start();
-    }
-
     /**
      * 判断某个线程是否持有对象监视器(就是锁)
      */
@@ -319,8 +213,8 @@ public class ThreadTest {
      *
      */
 //    @Test
-//    public void deadLock() {
-    public static void main(String[] args) {
+    public void deadLock() {
+//    public static void main(String[] args) {
 
         Thread t1 = new Thread("Thread A") {
             @Override
@@ -393,8 +287,8 @@ public class ThreadTest {
      * 如果线程是因为调用了wait()、sleep()或者join()方法而导致的 阻塞，可以中断线程，并且通过抛出InterruptedException来唤醒它
      * 如果线程遇到了IO阻塞，无能为力，因为IO是操作系统实现的
      */
-    public void weak() {
-//    public static void main(String[] args) {
+//    public void weak() {
+    public static void main(String[] args) {
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -413,84 +307,11 @@ public class ThreadTest {
         };
         t.start();
         //中断此线程
-        t.interrupt();
-        boolean interrupted = t.isInterrupted();
-        System.out.println(interrupted);
+//        t.interrupt();
+//        boolean interrupted = t.isInterrupted();
+//        System.out.println(interrupted);
         for (int i = 0; i < 100; i++) {
             System.out.println("业务逻辑整理" + i);
-        }
-    }
-
-    /**
-     * 信号量,限制某段代码块的并发数
-     */
-    public void semaphore() {
-//    public static void main(String[] args) {
-
-        //一个许可 可以产生synchronized 同步效果
-        Semaphore semaphore = new Semaphore(2);
-        SemaphoreThread semaphoreThread = new SemaphoreThread(semaphore, "thread1");
-        SemaphoreThread semaphoreThread2 = new SemaphoreThread(semaphore, "thread2");
-        semaphoreThread.start();
-        semaphoreThread2.start();
-
-    }
-
-    private static class SemaphoreThread extends Thread {
-        private Semaphore semaphore;
-
-        public SemaphoreThread(Semaphore semaphore, String name) {
-            super(name);
-            this.semaphore = semaphore;
-        }
-
-        @Override
-        public void run() {
-            //不是阻塞方式的到许可
-//            boolean b = semaphore.tryAcquire();
-//            System.out.println(semaphore.availablePermits());
-            try {
-                //阻塞到得到许可
-                semaphore.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-//            if (b) {
-            semaphoreTest(getName());
-            //释放许可
-            semaphore.release();
-
-//            }
-        }
-    }
-
-    private static class SemaphoreThread2 extends Thread {
-        private Semaphore semaphore;
-
-        public SemaphoreThread2(Semaphore semaphore, String name) {
-            super(name);
-            this.semaphore = semaphore;
-        }
-
-        @Override
-        public void run() {
-//            boolean b = semaphore.tryAcquire();
-//            System.out.println(semaphore.availablePermits());
-            try {
-                semaphore.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-//            if (b) {
-            semaphoreTest(getName());
-            semaphore.release();
-//            }
-        }
-    }
-
-    public static void semaphoreTest(String name) {
-        for (int i = 0; i < 100; i++) {
-            System.out.println(name + "  " + i);
         }
     }
 
