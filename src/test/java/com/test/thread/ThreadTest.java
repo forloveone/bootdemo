@@ -102,6 +102,7 @@ public class ThreadTest {
                     //可以用来取消或停止任务(能够使线程在终止时有机会去清理资源,而不是武断的停止线程)
                     if (this.isInterrupted()) {
                         System.out.println("test interrupt");
+                        return;
                     }
                 }
             }
@@ -190,27 +191,26 @@ public class ThreadTest {
      * 这个例子线程1一直没有释放锁,并请求锁2,线程2持有锁2并请求锁1,造成死锁
      * 线程 dump 信息
      * "Thread B" #13 prio=5 os_prio=0 tid=0x000000001a8b3800 nid=0xc60 waiting for monitor entry [0x000000001b46f000]
-     *    java.lang.Thread.State: BLOCKED (on object monitor)
-     *         at com.test.thread.ThreadTest.dead1(ThreadTest.java:330)
-     *         - waiting to lock <0x00000000d64c4428> (a java.lang.Object)
-     *         at com.test.thread.ThreadTest.dead2(ThreadTest.java:339)
-     *         - locked <0x00000000d64c4438> (a java.lang.Object)
-     *         at com.test.thread.ThreadTest$7.run(ThreadTest.java:318)
-     *
-     *    Locked ownable synchronizers:
-     *         - None
-     *
+     * java.lang.Thread.State: BLOCKED (on object monitor)
+     * at com.test.thread.ThreadTest.dead1(ThreadTest.java:330)
+     * - waiting to lock <0x00000000d64c4428> (a java.lang.Object)
+     * at com.test.thread.ThreadTest.dead2(ThreadTest.java:339)
+     * - locked <0x00000000d64c4438> (a java.lang.Object)
+     * at com.test.thread.ThreadTest$7.run(ThreadTest.java:318)
+     * <p>
+     * Locked ownable synchronizers:
+     * - None
+     * <p>
      * "Thread A" #12 prio=5 os_prio=0 tid=0x000000001a8b3000 nid=0xaec waiting for monitor entry [0x000000001b36f000]
-     *    java.lang.Thread.State: BLOCKED (on object monitor)
-     *         at com.test.thread.ThreadTest.dead2(ThreadTest.java:338)
-     *         - waiting to lock <0x00000000d64c4438> (a java.lang.Object)
-     *         at com.test.thread.ThreadTest.dead1(ThreadTest.java:332)
-     *         - locked <0x00000000d64c4428> (a java.lang.Object)
-     *         at com.test.thread.ThreadTest$6.run(ThreadTest.java:305)
-     *
-     *    Locked ownable synchronizers:
-     *         - None
-     *
+     * java.lang.Thread.State: BLOCKED (on object monitor)
+     * at com.test.thread.ThreadTest.dead2(ThreadTest.java:338)
+     * - waiting to lock <0x00000000d64c4438> (a java.lang.Object)
+     * at com.test.thread.ThreadTest.dead1(ThreadTest.java:332)
+     * - locked <0x00000000d64c4428> (a java.lang.Object)
+     * at com.test.thread.ThreadTest$6.run(ThreadTest.java:305)
+     * <p>
+     * Locked ownable synchronizers:
+     * - None
      */
 //    @Test
     public void deadLock() {
@@ -469,7 +469,7 @@ public class ThreadTest {
      * 如果一个线程想执行exchange() 它会一直等待第二个线程也执行exchange方法.
      */
 //    public static void main(String[] args) {
-    public void exchanger(){
+    public void exchanger() {
         pool.submit(new Thread(new A()));
         pool.submit(new Thread(new B()));
         pool.shutdown();
