@@ -150,6 +150,7 @@ public class RedisUtil {
 
     /**
      * 分布式锁的简单实现
+     * 悲观锁
      *
      * @param key   key有就是有锁
      * @param value uuid 解锁的时候要lua判断不能误解
@@ -165,9 +166,35 @@ public class RedisUtil {
     }
 
     /**
-     * 分布式锁--解锁
+     * 获得锁的重试机制
      *
-     * @param key 锁标识
+     * @param key
+     * @param value
+     * @param timeOut   持续存活的时间 秒
+     * @param retry     重试次数
+     * @param sleepTime 获取失败后休眠时间
+     */
+    public Boolean lockRetry(String key, String value, Long timeOut, Integer retry, Long sleepTime) {
+        Boolean flag = false;
+        try {
+            for (int i = 0; i < retry; i++) {
+                flag = setIfAbsent(key, value, timeOut);
+                if (flag) {
+                    break;
+                }
+                Thread.sleep(sleepTime);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * 分布式锁--解锁
+     * 悲观锁
+     *
+     * @param key   锁标识
      * @param value uuid 防止误解锁
      */
     public static boolean outLock(String key, String value) {
@@ -181,6 +208,25 @@ public class RedisUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * redis乐观锁 应用 秒杀 库存扣减
+     */
+    private void modifyAmount(int count) {
+        redisTemplate.watch("kucun");
+        String val = String.valueOf(redisTemplate.opsForValue().get("kucun"));
+        int valInt = Integer.valueOf(val);
+        if (valInt > 0 && valInt - count > 0) {
+            redisTemplate.multi();
+            redisTemplate.opsForValue().increment("kucun", -count);
+            List<Object> list = redisTemplate.exec();
+            if (list == null || list.size() == 0) {
+                System.out.println("对不起,抢购失败,请重试:" + list.size());
+            } else {
+                System.out.println("抢购成功");
+            }
+        }
     }
 
     /**
