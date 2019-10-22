@@ -5,14 +5,12 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -151,10 +149,45 @@ public class RedisUtil {
     }
 
     /**
+     * 分布式锁的简单实现
+     *
+     * @param key   key有就是有锁
+     * @param value uuid 解锁的时候要lua判断不能误解
+     * @param time  秒
+     */
+    public static boolean setIfAbsent(String key, Object value, long time) {
+        try {
+            return redisTemplate.opsForValue().setIfAbsent(key, value, time, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 分布式锁--解锁
+     *
+     * @param key 锁标识
+     * @param value uuid 防止误解锁
+     */
+    public static boolean outLock(String key, String value) {
+        String text = "if redis.call(\"get\",KEYS[1]) == ARGV[1] then return redis.call(\"del\",KEYS[1]) else return 0 end";
+        DefaultRedisScript<Long> script = new DefaultRedisScript();
+        script.setScriptText(text);
+        script.setResultType(Long.class);
+        //redistempalte封装的execute来实现调用，其中第二个参数为lua脚本中的KEYS[1],后面为可变参数，可变参数即传入我们需要的值，分别对应ARGV[1],ARGV[2]
+        Long execute = redisTemplate.execute(script, Arrays.asList(key), value);
+        if (execute > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 递增
      *
-     * @param key 键
-     * @param delta  要增加几(大于0)
+     * @param key   键
+     * @param delta 要增加几(大于0)
      * @return
      */
     public long incr(String key, long delta) {
@@ -167,8 +200,8 @@ public class RedisUtil {
     /**
      * 递减
      *
-     * @param key 键
-     * @param delta  要减少几(小于0)
+     * @param key   键
+     * @param delta 要减少几(小于0)
      * @return
      */
     public long decr(String key, long delta) {
@@ -301,9 +334,10 @@ public class RedisUtil {
 
     /**
      * 从redis hash 中取出 转成为pojo
-     *  Map转pojo
+     * Map转pojo
+     *
      * @param key
-     * @param cal   类的类型
+     * @param cal 类的类型
      * @return
      */
     public static <U> U hGetPojo(String key, Class<U> cal) {

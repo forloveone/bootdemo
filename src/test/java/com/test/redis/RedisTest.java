@@ -54,6 +54,20 @@ public class RedisTest {
         System.out.println(he);
     }
 
+    @Test
+    public void redisLock(){
+        boolean ggstart = RedisUtil.setIfAbsent("ggstart", "分布式锁test", 100000);
+        System.out.println(ggstart);
+    }
+
+    @Test
+    public void unLock(){
+        boolean b= RedisUtil.outLock("ggstart", "分布式锁test");
+        String ggstart = RedisUtil.get("ggstart");
+        System.out.println(ggstart);
+        System.out.println(b);
+    }
+
     /**
      * 存储pojo形式的  hash结构
      */
