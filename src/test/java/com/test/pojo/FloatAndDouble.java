@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-import com.test.data.enums.EnumJSON;
+import com.test.enums.EnumJSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

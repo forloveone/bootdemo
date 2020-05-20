@@ -1,0 +1,93 @@
+    注解
+
+    标识为Bean
+        @Controller
+        @Service
+        @Component
+        @Repository
+        这4个是等价的
+
+    属性注入
+        @Value
+            基本属性注入
+
+    Bean的装配
+        @Autowired
+        按类型自动装配一个bean
+
+        @Autowired
+        @Qualifier("student")
+        两个一起使用,是按名称注入
+
+        @Resource
+        按类型自动装配一个Bean
+        @Resource(name="student")
+        按名称装配bean
+
+        @PostConstruct
+        Bean初始化后执行,是注解在bean中的方法上的,bean初始化后,会调用这个方法
+        @PreDestroy
+        Bean销毁前执行
+
+    AOP
+        一般使用aspectJ的实现
+        		execution([访问权限类型]  返回值类型  [全限定性类名] 方法名(参数名) [抛出异常类型])
+
+        			[]中的东西可以省略
+        			*表示0到多个任意字符
+        			..用在参数中表示任意多个参数,用在包名后,表示当前包及其子包路径
+        			+用在类名后面,表示当前类及其子类,用在接口后,表示当前接口,及其实现类
+
+springMVC
+    使用ModelAndView可以使用转发和重定向
+    转发:
+        mv.setViewName("forward:test");
+        return mv; //请求转发到其他Controller
+
+        mv.setViewName("forward:/WEB-INF/views/hello.jsp");
+        return mv; //请求转发到页面
+    重定向:
+        重定向到页面时,不能到WEB-inf下,因为这里面的页面都得经过controller才能访问,重定向本质是浏览器又发了一次请求...
+
+        mv.setViewName("redirect:error.jsp");//重定向到页面
+
+        mv.setViewName("redirect:test");//重定向到其他Controller
+
+        在重定向时,请求参数是无法通过request的属性向下一级资源中传递的.
+        可以通过下面的方式达到参数传递的目的:
+            1.当返回的是ModeAndView 时,视图解析器会将Map的value放入到url后作为参数传递出去,所以无论什么类型都会变成string
+            所以当重定向到页面时可以用${param.name} 形式接收.
+            当重定向到其他Controller时,正常接收即可.
+
+            当返回的是String
+                return "redirect:test"
+                把当前方法中添加参数Model model 使用model来添加参数,和ModeAndView类似.取数据时也类似.
+
+            返回是void
+                只能用来重定向到页面,
+                response.sendRedirect(request.getContextPath()+"/show.jsp");
+                只能使用session来传递数据.
+
+            2.也可以在重定向前把参数放入到HttpSession中,到跳转后的地方冲session中取出来.
+
+
+    @ResponseBody
+        定义在方法上,适用于ajax只返回数据,不跳转页面的情况
+
+    @PathVariable
+        用来接收路径参数
+
+    @RequestBody
+        允许request的参数在request体中,而不是直接连接到地址后面.
+        放置在参数前
+
+    @Transactional
+        方法上,支持事务
+
+
+    服务器端推送:
+        早期解决方式是ajax向服务器轮询消息,使浏览器第一时间获得服务端消息,但是它大大增加了服务器压力.
+        当客户端向服务器端发送消息,服务端会抓住这个请求不放,等有数据更新的时候才返回给客户端,
+        当客户端接收到消息后,再向服务端发起请求,周而复始
+
+        Servlet3.0异步方法特性.TODO
