@@ -1,13 +1,14 @@
 package com.springboot.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import lombok.Data;
+import org.hibernate.validator.HibernateValidator;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import lombok.Data;
-import org.hibernate.validator.HibernateValidator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 这个工具适合于,已经赋值好的pojo,如果是springMVC则有更好的使用方式(spirng支持的方式)

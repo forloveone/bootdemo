@@ -34,4 +34,10 @@ public class MathTest {
         System.out.println(d);//12.5622
         System.out.println(Math.round(d)*100);//13*100 = 1300
     }
+
+    @Test
+    public void integer(){
+        int a = 45000;
+        System.out.println(a);
+    }
 }

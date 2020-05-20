@@ -16,6 +16,7 @@ public class ExtendTest {
 }
 
 class A {
+    public String name = "nameA";
     void doA(){
         System.out.println("A");
     }
@@ -26,8 +27,10 @@ class A {
 }
 
 class B extends A{
+    public String name = "nameB";
     void doA(){
         System.out.println("B");
+        System.out.println(name);
     }
 
 //    void test(){

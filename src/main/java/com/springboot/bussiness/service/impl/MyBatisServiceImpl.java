@@ -22,10 +22,13 @@ public class MyBatisServiceImpl implements MyBatisService {
     private UserMapper userMapper;
 
     @Transactional
+    //Transactional只能保证同时成功同时失败,并不能保证 并发的安全性.
     @Override
     public void insert(User user) throws Exception {
+        System.out.println(Thread.currentThread().getName());
+        Thread.sleep(10000);
         userMapper.insert(user);
-        throw new RuntimeException("test");
+//        throw new RuntimeException("test");
     }
 
     @Override

@@ -68,9 +68,7 @@ public class Person implements Comparable<Person> {
         personList.add(p3);
         personList.add(p4);
 
-        System.out.println(p1.compareTo(p2));
-        System.out.println(p1.compareTo(p3));
-        System.out.println(p3.compareTo(p1));
+        //排序
         Collections.sort(personList);
         System.out.println(personList);
 

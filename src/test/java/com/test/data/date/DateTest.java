@@ -68,4 +68,12 @@ public class DateTest {
             System.out.println("不是最后一天");
         }
     }
+
+    @Test
+    public void test7() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date parse = sdf.parse("2020-02-13 00:00:00");
+        System.out.println(parse);
+
+    }
 }

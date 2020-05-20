@@ -7,23 +7,14 @@ import java.util.concurrent.*;
  */
 public class FutureTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
-        Callable<String> task = new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-//                Thread.sleep(10000);
-                for (int i = 0; i < 1000000; i++) {
-                    System.out.println(i);
-                }
-                return "abc";
-            }
-        };
+        TaskForFuture task = new TaskForFuture();
         Future<String> future = new FutureTask<String>(task);
         ExecutorService service = Executors.newFixedThreadPool(3);
         Future<String> submit = service.submit(task);
-//        String o = submit.get(1, TimeUnit.SECONDS);//这个时间短为什么返回结果不正常 TODO
         String o = null;
         try {
-            o = submit.get(1, TimeUnit.SECONDS);
+            o = submit.get(1, TimeUnit.SECONDS);//这个会跳到TimeoutException中
+//            o = submit.get();//会一直阻断到任务结束为止
         } catch (InterruptedException e) {
             e.printStackTrace();
             //被中断,也就是被其他线程通知要结束.
@@ -33,10 +24,23 @@ public class FutureTest {
         } catch (TimeoutException e) {
 //            e.printStackTrace();
             //记录日志并 取消任务
+            System.out.println("任务被取消");
             submit.cancel(true);
         }
         System.out.println(o);
 
         service.shutdown();//和shutdownnow的区别 TODO
+    }
+
+
+    static class TaskForFuture implements Callable<String> {
+        @Override
+        public String call() throws Exception {
+//                Thread.sleep(10000);
+            for (int i = 0; i < 1000000; i++) {
+                System.out.println(i);
+            }
+            return "abc";
+        }
     }
 }

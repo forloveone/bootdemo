@@ -1,6 +1,7 @@
 package com.test.data.json;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -246,10 +247,21 @@ public class StringTest {
 
         String s = StringUtils.rightPad("12", 36, "1");
         System.out.println(s);
+
+//        String mobile = "15010793767";
+        String mobile = null;
+        System.out.println(StringUtils.rightPad(StringUtils.left(mobile, 3),7,"*"));
+
+        //System.out.println(mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(RegExUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(StringUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+
+
     }
 
     /**
      * 编码转换
+     *
      * @throws UnsupportedEncodingException
      */
     @Test
@@ -267,7 +279,7 @@ public class StringTest {
      * IP 其实是一个整数类型,所以mysql存储的时候用整形.
      */
     @Test
-    public void ip(){
+    public void ip() {
         long ipConvertNum = getIpConvertNum("255.255.255.2");
         System.out.println(ipConvertNum);
         String numConvertIp = getNumConvertIp(ipConvertNum);
@@ -276,10 +288,9 @@ public class StringTest {
 
     /**
      * 将数字转成ip地址
-     *
      */
     public static String getNumConvertIp(long ipLong) {
-        long mask[] = { 0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000 };
+        long mask[] = {0x000000FF, 0x0000FF00, 0x00FF0000, 0xFF000000};
         long num = 0;
         StringBuffer ipInfo = new StringBuffer();
         for (int i = 0; i < 4; i++) {
@@ -294,8 +305,7 @@ public class StringTest {
     /**
      * 将ip 地址转换成数字
      *
-     * @param ipAddress
-     *            传入的ip地址
+     * @param ipAddress 传入的ip地址
      * @return 转换成数字类型的ip地址
      */
     public static long getIpConvertNum(String ipAddress) {
@@ -307,5 +317,11 @@ public class StringTest {
 
         long ipNum = a * 256 * 256 * 256 + b * 256 * 256 + c * 256 + d;
         return ipNum;
+    }
+
+    @Test
+    public void testHash() {
+        String str = "1234kjadjfk";
+        System.out.println(str.hashCode());
     }
 }

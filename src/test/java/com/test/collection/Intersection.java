@@ -3,10 +3,7 @@ package com.test.collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 两个数组,第一个和第二个,看减少了什么,增加了什么
@@ -64,5 +61,32 @@ public class Intersection {
         b.retainAll(a);
         a.removeAll(b);
         System.out.println(a);
+    }
+
+    /**
+     * 要求拉链法求交集
+     */
+    @Test
+    public void testZipperListIntersection() {
+        String[] str = {"1", "3", "5", "7", "8", "9"};
+        String[] str2 = {"2", "3", "4", "5", "5", "5"};
+        List<String> list = Arrays.asList(str);
+        List<String> list2 = Arrays.asList(str2);
+        List<String> returnList = new ArrayList<>();
+        int index1 = 0;
+        int index2 = 0;
+        int count = 0;
+        while (true) {
+            count++;
+            if (list.get(index1).equals(list2.get(index2))) {
+                returnList.add(list.get(index1));
+            } else {
+                //指针较小的一个,加一,直到某个队列的队未,结束
+
+            }
+        }
+
+//        System.out.println(returnList.toString());
+//        System.out.println(count);
     }
 }

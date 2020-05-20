@@ -129,6 +129,7 @@ public class ThreadTest {
         }
         TempTest temp = new TempTest();
         String call = temp.call();
+        Thread.sleep(10000);
         System.out.println(call);
 
     }

@@ -3,7 +3,7 @@
 <!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
 <configuration status="OFF">
     <Properties>
-        <Property name="log.path">D:/log</Property>
+        <Property name="log.path">bootDemoLog</Property>
     </Properties>
 
     <!--定义日志输出点-->

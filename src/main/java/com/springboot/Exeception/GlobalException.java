@@ -3,7 +3,6 @@ package com.springboot.Exeception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.management.ManagementFactory;
 import java.util.List;

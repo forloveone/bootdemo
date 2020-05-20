@@ -3,6 +3,7 @@ package com.springboot;
 import lombok.Data;
 
 import java.util.Locale;
+
 @Data
 public class HelloJMockit {
     private int i;
