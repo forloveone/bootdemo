@@ -8,10 +8,9 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.springboot</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>com.dujinyue</groupId>
+    <artifactId>project test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <!--<name>demo</name>-->
     <description>Demo project for Spring Boot</description>
 
     <properties>
