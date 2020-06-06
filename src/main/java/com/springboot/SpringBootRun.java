@@ -1,7 +1,6 @@
 package com.springboot;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -24,17 +23,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class SpringBootRun {
 
     public static void main(String[] args) {
-//        SpringApplication.run(SpringBootRun.class, args);
-        SpringApplication application = new SpringApplication(SpringBootRun.class);
-        application.setBannerMode(Banner.Mode.OFF);//banner关闭
-        application.run(args);
+        SpringApplication.run(SpringBootRun.class, args);
+//        SpringApplication application = new SpringApplication(SpringBootRun.class);
+//        application.setBannerMode(Banner.Mode.OFF);//banner关闭
+//        application.run(args);
     }
 
     private void toDo() {
         /*
             拦截器 和 Aop 的区别
-         */
-        /*
+
          数据处理
                 枚举
                 Data属性处理 日期工具应该参考 joda
@@ -50,21 +48,16 @@ public class SpringBootRun {
           http请求post,get(两个站点的通信)
                 使用多线程并发请求另一个站点
                 spring restTemplate,两个服务器之间的数据交换(java)
-         */
-        /*
+
             多线程
             定时任务 	quartz 分布式定时任务处理?
-         */
-        /*
+
             反射
-         */
-        /*
+
             IO  非阻塞IO
-         */
-        /*
+
             分布式日志 lmax无锁异步日志
-         */
-        /*
+
             分布式session原理
          */
     }
@@ -96,8 +89,4 @@ public class SpringBootRun {
         //内部类的应用? com.springboot.class_relationship.Outer
         //execution 详解 复杂的aop能实现什么? aop 不能用拦截器吗? AspectJTest
     }
-
-    //    private void future() {
-    //        //java 操作视频
-    //    }
 }
