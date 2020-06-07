@@ -90,11 +90,10 @@ public class HttpTest {
 
     /**
      * spring restTemplate 模式
-     * docker mysql 启动有问题 TODO 需要搞
      */
     @Test
     public void spring(){
-        ResponseEntity<String> response = restTemplate.getForEntity("www.baidu.com", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("http://www.baidu.com", String.class);
         System.out.println(response.getBody());
     }
 }

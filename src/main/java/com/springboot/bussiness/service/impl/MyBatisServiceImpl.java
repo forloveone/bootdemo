@@ -35,9 +35,9 @@ public class MyBatisServiceImpl implements MyBatisService {
     public void callProduce() {
         /*
         CREATE DEFINER=`root`@`localhost` PROCEDURE `procedureDemo`()
-BEGIN
-		select * from usertest;
-END
+            BEGIN
+                    select * from usertest;
+            END
          */
         List<User> users = userMapper.callTest();
     }

@@ -6,12 +6,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.3.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
+
     <groupId>com.dujinyue</groupId>
-    <artifactId>project test</artifactId>
+    <artifactId>art</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>Demo project for Spring Boot</description>
+    <description>art for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>

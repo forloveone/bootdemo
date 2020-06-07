@@ -34,6 +34,7 @@ public class JavaMailTest {
 
     /**
      * 发送邮件方法
+     *
      * @param receive 接收方
      * @param title   标题
      * @param content 内容
@@ -63,5 +64,14 @@ public class JavaMailTest {
         transport.connect(senderName, senderPassword);
         transport.sendMessage(message, message.getAllRecipients());//发送邮件,其中第二个参数是所有已设好的收件人地址
         transport.close();
+    }
+
+    /**
+     * https://www.jianshu.com/p/13b3d22dfdac
+     * spring 发送邮件
+     */
+    @Test
+    public void springMaill() {
+
     }
 }

@@ -1,6 +1,7 @@
 package com.test.json;
 
 import com.google.gson.Gson;
+import com.test.design_pattern.Singleton;
 import com.test.pojo.Student;
 import com.test.pojo.Teacher;
 import org.apache.commons.beanutils.BeanUtils;
@@ -31,7 +32,7 @@ public class DeepClone {
         Student studentClone = (Student) student.deepClone();
         studentClone.getTeacher().setName("tony");
         studentClone.getTeacher().setAge(40);
-        System.out.println(student.hashCode()+"     "+studentClone.hashCode());
+        System.out.println(student.hashCode()+"     "+System.identityHashCode(student)+"   "+studentClone.hashCode());
 
         //另一种思路是,通过转成json再转换回来
         Gson json = new Gson();
@@ -49,5 +50,18 @@ public class DeepClone {
         Student beanUtilsClone = (Student) BeanUtils.cloneBean(student);
         beanUtilsClone.getTeacher().setName("BeanUtis");
         System.out.println(student.hashCode()+"        "+beanUtilsClone.hashCode());
+    }
+
+    @Test
+    public void test2(){
+        Student s1 = new Student();
+        Student s2 = new Student();
+        System.out.println(s1.hashCode()+" "+s2.hashCode());
+        //这个才能判断是否 是同一个对象
+        System.out.println(System.identityHashCode(s1)+" "+System.identityHashCode(s2));
+
+        Singleton instance = Singleton.getInstance();
+        Singleton instance2 = Singleton.getInstance();
+        System.out.println(System.identityHashCode(instance)+" "+System.identityHashCode(instance2));
     }
 }

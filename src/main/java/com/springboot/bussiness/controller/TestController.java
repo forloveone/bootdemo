@@ -4,13 +4,9 @@ import com.springboot.aop.AopBeforeAnnotation;
 import com.springboot.bussiness.pojo.Person;
 import com.springboot.bussiness.pojo.TestPojo;
 import com.springboot.bussiness.service.AsyncServiceTest;
-import com.springboot.bussiness.service.MyBatisService;
 import com.springboot.bussiness.service.PushService;
 import com.springboot.events.EventsTest;
 import com.springboot.utils.DateUtil;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -37,6 +33,7 @@ public class TestController {
     //属性注入
     @Value("${my.name}")
     private String name;
+
     //属性注入Pojo
     @Autowired
     private Person person;
@@ -50,15 +47,10 @@ public class TestController {
     @Autowired
     PushService pushService;
 
-    @Autowired
-    private MyBatisService myBatisService;
-
-//    @Autowired
-//    private RedisTemplate redisTemplate;
-
     //produces 可以定制返回的response的媒体类型和字符集
     @RequestMapping(value = "/", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
     @AopBeforeAnnotation(name = "基于注解的aop")
+    @ResponseBody
     public String home() {
         System.out.println(name);
         return "Hello World!";
@@ -162,12 +154,6 @@ public class TestController {
         return pushService.getAsyncUpdate();
     }
 
-    //对于非幂等的请求（比如新增，更新操作），千万不要使用重试
-    @RequestMapping("retry")
-    public void retry() {
-        myBatisService.retryTest();
-    }
-
     @RequestMapping("getParam")
     public void getParam(String name, int age) {
         System.out.println("姓名是" + name + "\n" + "年龄是" + age);
@@ -177,30 +163,4 @@ public class TestController {
     public void testHttpclient(@RequestBody Person person, String name) {
         System.out.println(person);
     }
-
-    @Autowired
-    private AmqpTemplate rabbitTemplate;
-
-    @RequestMapping("serderToRabbitMQ")
-    public void sendMQ() {
-        String context = "hello " + new Date();
-        //单生产者 queue
-        rabbitTemplate.convertAndSend("hello", context);
-    }
-
-    //多个生产者会 自动分发
-    @RabbitListener(queues = "hello")
-    @RabbitHandler
-    public void reciver(String data) {
-        System.out.println("reciver" + data);
-    }
-
-    @RabbitListener(queues = "hello")
-    @RabbitHandler
-    public void reciver2(String data) {
-        System.out.println("reciver2" + data);
-    }
-
-    //rebbitmq topic
-
 }
