@@ -1,6 +1,5 @@
 package com.springboot.bussiness.controller;
 
-import com.springboot.aop.AopBeforeAnnotation;
 import com.springboot.bussiness.pojo.Person;
 import com.springboot.bussiness.pojo.TestPojo;
 import com.springboot.bussiness.service.AsyncServiceTest;
@@ -8,12 +7,8 @@ import com.springboot.bussiness.service.PushService;
 import com.springboot.events.EventsTest;
 import com.springboot.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,19 +19,10 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Controller
-@RequestMapping("/testController") //映射此类的访问路径是/testController
+@RequestMapping("/testController")
 public class TestController {
-
-    //属性注入
-    @Value("${my.name}")
-    private String name;
-
-    //属性注入Pojo
-    @Autowired
-    private Person person;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -46,15 +32,6 @@ public class TestController {
 
     @Autowired
     PushService pushService;
-
-    //produces 可以定制返回的response的媒体类型和字符集
-    @RequestMapping(value = "/", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
-    @AopBeforeAnnotation(name = "基于注解的aop")
-    @ResponseBody
-    public String home() {
-        System.out.println(name);
-        return "Hello World!";
-    }
 
     @RequestMapping("/testError")
     public void error() throws Exception {
@@ -66,24 +43,6 @@ public class TestController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("forward:testError");
 //        mv.setViewName("forward:/WEB-INF/views/hello.jsp");
-        return mv;
-    }
-
-    @AopBeforeAnnotation(name = "基于注解的aop")
-    @RequestMapping(value = "/test5", method = RequestMethod.POST)
-    @ResponseBody
-    public ModelAndView test5(@Validated Person person, BindingResult br) {
-        ModelAndView mv = new ModelAndView();
-        List<ObjectError> allErrors = br.getAllErrors();
-        //没有错误
-        if (allErrors.size() == 0) {
-            //还没有页面 ,或者数据处理
-            mv.setViewName("Validate pass");
-        } else {
-            String errors = allErrors.toString();
-            mv.addObject("ex", errors);
-            mv.setViewName("error");
-        }
         return mv;
     }
 
