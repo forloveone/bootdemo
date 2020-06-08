@@ -8,24 +8,28 @@
         <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, password, add_time
-  </sql>
+        id, name, password, add_time
+    </sql>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from usertest
         where id = #{id,jdbcType=BIGINT}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from usertest
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from usertest
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
     <insert id="insert" parameterType="com.springboot.bussiness.pojo.User">
-    insert into usertest (id, name, password, 
-      add_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{addTime,jdbcType=TIMESTAMP})
-  </insert>
+        insert into usertest (id, name, password,
+          add_time)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+          #{addTime,jdbcType=TIMESTAMP})
+    </insert>
+
     <insert id="insertSelective" parameterType="com.springboot.bussiness.pojo.User">
         insert into usertest
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -57,6 +61,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.springboot.bussiness.pojo.User">
         update usertest
         <set>
@@ -72,13 +77,14 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.springboot.bussiness.pojo.User">
-    update usertest
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      add_time = #{addTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update usertest
+        set name = #{name,jdbcType=VARCHAR},
+          password = #{password,jdbcType=VARCHAR},
+          add_time = #{addTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
     <select id="callTest" resultMap="BaseResultMap">
         call procedureDemo;

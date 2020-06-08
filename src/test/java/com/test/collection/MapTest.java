@@ -19,7 +19,7 @@ public class MapTest {
         map.put("2", "Student2");
         map.put("3", "Student3");
         map.put("4", "Student4");
-        map.put(null,"test");
+        map.put(null, "test");
         this.map = map;
     }
 
@@ -70,22 +70,22 @@ public class MapTest {
      * TreeMap的构造方法允许使用指定的比较器来比较
      */
     @Test
-    public void treeMap(){
+    public void treeMap() {
         // 创建TreeMap ,可以自定义比较器,在初始化的时候构造进去
-        TreeMap<Integer,Integer> treeMap = new TreeMap<>();
-        treeMap.put(2,4);
-        treeMap.put(1,5);
-        treeMap.put(4,2);
-        treeMap.put(3,3);
-        treeMap.put(7,1);
-        treeMap.put(5,1);
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+        treeMap.put(2, 4);
+        treeMap.put(1, 5);
+        treeMap.put(4, 2);
+        treeMap.put(3, 3);
+        treeMap.put(7, 1);
+        treeMap.put(5, 1);
 
         // 迭代TreeMap的结果
-        Iterator<Map.Entry<Integer,Integer>> iterator = treeMap.entrySet().iterator();
+        Iterator<Map.Entry<Integer, Integer>> iterator = treeMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Integer,Integer> entry = iterator.next();
-            System.out.println("key : "+entry.getKey()+" value : " + entry.getValue());
+            Map.Entry<Integer, Integer> entry = iterator.next();
+            System.out.println("key : " + entry.getKey() + " value : " + entry.getValue());
         }
-        System.out.println("after sorted, the size : " +treeMap.size());
+        System.out.println("after sorted, the size : " + treeMap.size());
     }
 }
