@@ -3,8 +3,11 @@ package com.test.mail;
 import com.springboot.SpringBootRun;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -66,12 +69,22 @@ public class JavaMailTest {
         transport.close();
     }
 
-    /**
-     * https://www.jianshu.com/p/13b3d22dfdac
-     * spring 发送邮件
-     */
+
+    @Autowired
+    JavaMailSender sender;
+
     @Test
     public void springMaill() {
-
+        //建立邮件消息
+        SimpleMailMessage mainMessage = new SimpleMailMessage();
+        //发送方
+        mainMessage.setFrom("15010793767@163.com");
+        //接收方
+        mainMessage.setTo("1587007493@qq.com");
+        //发送的标题
+        mainMessage.setSubject("spring boot maill");
+        //发送的内容
+        mainMessage.setText("mail test");
+        sender.send(mainMessage);
     }
 }

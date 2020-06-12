@@ -206,11 +206,16 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.5</version>
         </dependency>
-
+        <!-- mail 的一种方式-->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
+        </dependency>
+        <!-- mail spring 方式-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <dependency>

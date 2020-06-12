@@ -3,6 +3,8 @@ package com.test.class_relationship;
 /**
  * 继承关系的缺点
  * test方法, 就是如果有3级继承关系,A中有方法test,被C中适用了,有一天B需要重写test方法,就会导致C中test方法行为会变化.
+ *
+ * 集成重写后
  */
 public class ExtendTest {
     public static void main(String[] args) {
@@ -29,8 +31,7 @@ class A {
 class B extends A{
     public String name = "nameB";
     void doA(){
-        System.out.println("B");
-        System.out.println(name);
+        System.out.println("B " + name);
     }
 
 //    void test(){
