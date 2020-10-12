@@ -7,6 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * SpringBootApplication 注解集合了
@@ -20,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync //异步任务的支持
 @MapperScan("com.springboot.bussiness.dao") //扫描mybatis的接口
 @EnableRetry
+@EnableTransactionManagement
 public class SpringBootRun {
 
     public static void main(String[] args) {
@@ -31,8 +33,6 @@ public class SpringBootRun {
 
     private void toDo() {
         /*
-            拦截器 和 Aop 的区别
-
          数据处理
                 枚举
                 Data属性处理 日期工具应该参考 joda

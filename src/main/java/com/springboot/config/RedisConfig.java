@@ -17,13 +17,11 @@ public class RedisConfig {
      * 实例化 RedisTemplate 对象
      * redisConnectionFactory 主动注入的直接可以作为方法的参数
      */
-
     @Bean
     public RedisTemplate<String, Object> functionDomainRedisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         //配置连接工厂
         template.setConnectionFactory(factory);
-
         // 设置value的序列化规则和 key的序列化规则
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         template.setKeySerializer(new StringRedisSerializer());

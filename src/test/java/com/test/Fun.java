@@ -212,4 +212,25 @@ public class Fun {
             }
         }
     }
+
+    /**
+     * case 会穿透所有的
+     */
+    @Test
+    public void switchTest() {
+        int a = 0;
+        while (a < 5) {
+            switch (a) {
+                case 0:
+                case 3:
+                    a = a + 2;
+                case 1:
+                case 2:
+                    a = a + 3;
+                default:
+                    a = a + 5;
+            }
+        }
+        System.out.println(a);
+    }
 }
