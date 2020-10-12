@@ -98,10 +98,10 @@ class TestDemo2{
 
     public static void main(String[] args) {
         callee1 c1 = new callee1();
-        callee2 c2 = new callee2();
-        MyIncr.f(c2);
+        callee2 c3 = new callee2();
+        MyIncr.f(c3);
         Caller caller1 = new Caller(c1);
-        Caller caller2 = new Caller(c2.getCallBackReference());
+        Caller caller2 = new Caller(c3.getCallBackReference());
         caller1.go();
         caller1.go();
         caller2.go();
