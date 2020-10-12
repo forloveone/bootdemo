@@ -97,11 +97,11 @@ class TestDemo2{
 
 
     public static void main(String[] args) {
-        callee1 c1 = new callee1();
-        callee2 c3 = new callee2();
-        MyIncr.f(c3);
-        Caller caller1 = new Caller(c1);
-        Caller caller2 = new Caller(c3.getCallBackReference());
+        callee1 c123 = new callee1();
+        callee2 c321 = new callee2();
+        MyIncr.f(c321);
+        Caller caller1 = new Caller(c123);
+        Caller caller2 = new Caller(c321.getCallBackReference());
         caller1.go();
         caller1.go();
         caller2.go();
