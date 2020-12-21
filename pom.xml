@@ -161,7 +161,7 @@
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.10</version>
+            <version>1.4.15</version>
         </dependency>
         <!--想要mvc 返回对象默认使用xml格式需要这个jar包-->
         <dependency>
