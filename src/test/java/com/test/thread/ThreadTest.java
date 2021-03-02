@@ -1,6 +1,6 @@
 package com.test.thread;
 
-import com.test.pojo.ThreadPojo;
+import com.test.base.pojo.ThreadPojo;
 import org.junit.Test;
 
 import java.util.HashMap;

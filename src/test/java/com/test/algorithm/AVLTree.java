@@ -8,7 +8,6 @@ import org.junit.Test;
  * @author skywang
  * @date 2013/11/07
  */
-
 public class AVLTree<T extends Comparable<T>> {
     private AVLTreeNode<T> mRoot;    // 根结点
 

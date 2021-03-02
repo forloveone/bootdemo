@@ -6,7 +6,6 @@ package com.test.algorithm;
  * @author skywang
  * @date 2013/11/07
  */
-
 public class BSTree<T extends Comparable<T>> {
 
     private BSTNode<T> mRoot;    // 根结点
