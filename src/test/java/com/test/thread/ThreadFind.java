@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 /**
  * arraylist中有两万个，0-9的int型数据，怎么快速删除为2的
  * 多线程每个线程做一部分，并把结果合并起来（怎么实现）
- *
+ * <p>
  * 为什么没有        list.removeIf(next -> next == 2); 快?
  */
 public class ThreadFind {

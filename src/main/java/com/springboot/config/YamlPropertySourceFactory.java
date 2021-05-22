@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *  可以使yml 注入到pojo中,原来只支持properties文件
+ * 可以使yml 注入到pojo中,原来只支持properties文件
  */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
     @Override

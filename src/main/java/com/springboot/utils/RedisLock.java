@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 /**
  * Redis 做分布式锁，利用 redis的setnx（SET if Not eXists）命令 和 getset 命令，
  * 即下面代码中的方法 setIfAbsent 和 getAndSet
- *
+ * <p>
  * 这个是悲观锁
  */
 public class RedisLock {

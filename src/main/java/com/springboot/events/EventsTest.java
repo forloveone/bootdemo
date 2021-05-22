@@ -15,7 +15,7 @@ public class EventsTest extends ApplicationEvent {
     /**
      * @param source the object on which the event initially occurred (never {@code null})
      */
-    public EventsTest(Object source,String message) {
+    public EventsTest(Object source, String message) {
         super(source);
         this.message = message;
     }

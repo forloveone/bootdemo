@@ -41,11 +41,12 @@ public class EncryptUtil {
     }
 
     /**
-     *  apache md5 加密方式
+     * apache md5 加密方式
+     *
      * @param str 需要加密String
      * @return MD5加密串
      */
-    public static String md5(String str){
+    public static String md5(String str) {
         return DigestUtils.md5Hex(str);
     }
 }

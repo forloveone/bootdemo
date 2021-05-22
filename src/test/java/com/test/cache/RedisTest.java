@@ -47,7 +47,7 @@ public class RedisTest {
     public void redisString() {
         boolean set = RedisUtil.set("123", person);
         System.out.println(set);
-        Person test2 =  RedisUtil.get("123");
+        Person test2 = RedisUtil.get("123");
         System.out.println(test2);
         RedisUtil.set("test", "hello1");
         String he = RedisUtil.get("test");
@@ -55,14 +55,14 @@ public class RedisTest {
     }
 
     @Test
-    public void redisLock(){
+    public void redisLock() {
         boolean ggstart = RedisUtil.setIfAbsent("ggstart", "分布式锁test", 100000);
         System.out.println(ggstart);
     }
 
     @Test
-    public void unLock(){
-        boolean b= RedisUtil.outLock("ggstart", "分布式锁test");
+    public void unLock() {
+        boolean b = RedisUtil.outLock("ggstart", "分布式锁test");
         String ggstart = RedisUtil.get("ggstart");
         System.out.println(ggstart);
         System.out.println(b);

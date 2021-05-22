@@ -12,7 +12,7 @@ public enum EnumJSON {
     SATURDAY,
     SUNDAY;
 
-//
+    //
 //    private EnumJSON(String name) {
 //        this.name = name;
 //    }

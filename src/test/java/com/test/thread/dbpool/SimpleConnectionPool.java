@@ -32,6 +32,7 @@ public class SimpleConnectionPool {
             }
         }
     }
+
     //在时间内无法获取连接会返回null
     public Connection fetchConnection(long mills) throws InterruptedException {
         synchronized (pool) {

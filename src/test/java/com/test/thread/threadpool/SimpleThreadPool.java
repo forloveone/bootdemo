@@ -49,7 +49,7 @@ public class SimpleThreadPool<Job extends Runnable> implements ThreadPool<Job> {
 
     @Override
     public void removeWorker(int num) {
-        synchronized (jobs){
+        synchronized (jobs) {
 //            if (num+this.workerNum)
         }
     }
@@ -78,7 +78,7 @@ public class SimpleThreadPool<Job extends Runnable> implements ThreadPool<Job> {
         for (int i = 0; i < num; i++) {
             Worker worker = new Worker();
             workers.add(worker);
-            Thread thread = new Thread(worker,"ThreadPool-Worker-"+threadNum.incrementAndGet());
+            Thread thread = new Thread(worker, "ThreadPool-Worker-" + threadNum.incrementAndGet());
             thread.start();
         }
     }

@@ -13,9 +13,10 @@ import java.util.Map;
 public class ExcelUtil {
     /**
      * 导出excel 到浏览器(直接下载的方式)
-     * @param datas 这个是要导出的数据,格式为List<HashMap>
+     *
+     * @param datas    这个是要导出的数据,格式为List<HashMap>
      * @param response 做写会到浏览器下载用的
-     * @param type 这个是excel文件名,sheet名,可以根据这个区分不同的导出(可以是中文)
+     * @param type     这个是excel文件名,sheet名,可以根据这个区分不同的导出(可以是中文)
      */
     public static void outPutExcelToBrowser(List datas, HttpServletResponse response, String type) {
         try {
@@ -27,7 +28,7 @@ public class ExcelUtil {
             row = sheet.createRow(0);
             row.setHeightInPoints(20);
             //给第一行赋值
-            setValueInCell(type,row);
+            setValueInCell(type, row);
 
             Map map;//单条数据
             for (int i = 0; i < datas.size(); i++) {
@@ -45,7 +46,7 @@ public class ExcelUtil {
             response.reset();
             response.setContentType("multipart/form-data"); //自动识别
             response.setCharacterEncoding("utf-8");
-            response.setHeader("Content-Disposition", "attachment;filename="+new String(type.getBytes("gb2312"), "ISO8859-1")+".xls");
+            response.setHeader("Content-Disposition", "attachment;filename=" + new String(type.getBytes("gb2312"), "ISO8859-1") + ".xls");
             //文件流输出到rs里
             OutputStream out = response.getOutputStream();
             workbook.write(out);
@@ -57,9 +58,9 @@ public class ExcelUtil {
     }
 
     private static void setValueInCell(String type, HSSFRow row) {
-        if("授信查询".equals(type)){
-            String[] titles = {"项目名称","项目编号","授信编号","贷款人姓名","证件号码","授信额度","贷款利率%","贷款利率类型", "还款类型","贷款期限",
-                    "贷款期限单位","授信期限","授信期限单位","授信使用有效期开始日期","授信使用有效期结束日期", "费率值","费用类型", "授信结果","授信提交日期","客户类型",
+        if ("授信查询".equals(type)) {
+            String[] titles = {"项目名称", "项目编号", "授信编号", "贷款人姓名", "证件号码", "授信额度", "贷款利率%", "贷款利率类型", "还款类型", "贷款期限",
+                    "贷款期限单位", "授信期限", "授信期限单位", "授信使用有效期开始日期", "授信使用有效期结束日期", "费率值", "费用类型", "授信结果", "授信提交日期", "客户类型",
                     "证件类型"};
             HSSFCell cell;
             HSSFCell[] cells = new HSSFCell[22];
@@ -68,7 +69,7 @@ public class ExcelUtil {
                 cell.setCellType(HSSFCell.CELL_TYPE_STRING);
                 cells[i] = cell;
             }
-            for (int i = 0;i<21;i++){
+            for (int i = 0; i < 21; i++) {
                 cells[i].setCellValue(new HSSFRichTextString(titles[i]));
             }
         }
@@ -76,7 +77,7 @@ public class ExcelUtil {
 
     //这个是处理单条数据的, type 是文件名和sheet名,row 是行对象,map是一条数据
     private static void setValueInCell(String type, HSSFRow row, Map map) {
-        if ("授信查询".equals(type)){
+        if ("授信查询".equals(type)) {
             HSSFCell cell;
             //先创初始化cell
             HSSFCell[] cells = new HSSFCell[22];
@@ -94,7 +95,7 @@ public class ExcelUtil {
             cells[5].setCellValue(new HSSFRichTextString(map.get("credit_line").toString()));
             cells[6].setCellValue(new HSSFRichTextString(map.get("loan_interest_rate").toString()));
             cells[7].setCellValue(new HSSFRichTextString(""));//贷款利率类型没有
-            switch(Integer.valueOf((String)map.get("other_repay_method"))){
+            switch (Integer.valueOf((String) map.get("other_repay_method"))) {
                 case 1:
                     cells[8].setCellValue(new HSSFRichTextString("等额本息"));
                     break;
@@ -127,45 +128,45 @@ public class ExcelUtil {
                     break;
             }
             cells[9].setCellValue(new HSSFRichTextString(map.get("loan_term").toString()));
-            if("YEAR".equals(map.get("loan_term_unit"))){
+            if ("YEAR".equals(map.get("loan_term_unit"))) {
                 cells[10].setCellValue(new HSSFRichTextString("年"));
-            }else if("MONTH".equals(map.get("loan_term_unit"))){
+            } else if ("MONTH".equals(map.get("loan_term_unit"))) {
                 cells[10].setCellValue(new HSSFRichTextString("月"));
-            }else{
+            } else {
                 cells[10].setCellValue(new HSSFRichTextString("日"));
             }
             cells[11].setCellValue(new HSSFRichTextString(map.get("credit_term").toString()));
-            if("YEAR".equals(map.get("credit_term_unit"))){
+            if ("YEAR".equals(map.get("credit_term_unit"))) {
                 cells[12].setCellValue(new HSSFRichTextString("年"));
-            }else if("MONTH".equals(map.get("credit_term_unit"))){
+            } else if ("MONTH".equals(map.get("credit_term_unit"))) {
                 cells[12].setCellValue(new HSSFRichTextString("月"));
-            }else{
+            } else {
                 cells[12].setCellValue(new HSSFRichTextString("日"));
             }
             cells[13].setCellValue(new HSSFRichTextString(String.valueOf(map.get("start_date"))));
             cells[14].setCellValue(new HSSFRichTextString(String.valueOf(map.get("end_date"))));
             cells[15].setCellValue(new HSSFRichTextString(String.valueOf(map.get("fee_rate"))));
             cells[16].setCellValue(new HSSFRichTextString(String.valueOf(map.get("fee_type"))));
-            if ("ACCEPTED".equals(map.get("result"))){
+            if ("ACCEPTED".equals(map.get("result"))) {
                 cells[17].setCellValue(new HSSFRichTextString("审批通过"));
-            }else{
+            } else {
                 cells[17].setCellValue(new HSSFRichTextString("审批拒绝"));
             }
             cells[18].setCellValue(new HSSFRichTextString(""));//授信提交日期 没有
-            if (Integer.valueOf("1").equals(map.get("customer_type"))){
+            if (Integer.valueOf("1").equals(map.get("customer_type"))) {
                 cells[19].setCellValue(new HSSFRichTextString("个人客户"));
-            }else{
+            } else {
                 cells[19].setCellValue(new HSSFRichTextString("法人客户"));
             }
-            if(Integer.valueOf("1").equals(map.get("customer_type")) && "0".equals(map.get("papers_type"))){
+            if (Integer.valueOf("1").equals(map.get("customer_type")) && "0".equals(map.get("papers_type"))) {
                 cells[20].setCellValue(new HSSFRichTextString("身份证"));
-            }else if (Integer.valueOf("1").equals(map.get("customer_type")) && "2".equals(map.get("papers_type"))){
+            } else if (Integer.valueOf("1").equals(map.get("customer_type")) && "2".equals(map.get("papers_type"))) {
                 cells[20].setCellValue(new HSSFRichTextString("护照"));
-            }else if(Integer.valueOf("1").equals(map.get("customer_type")) && "X".equals(map.get("papers_type"))){
+            } else if (Integer.valueOf("1").equals(map.get("customer_type")) && "X".equals(map.get("papers_type"))) {
                 cells[20].setCellValue(new HSSFRichTextString("其他证件"));
-            }else if (!Integer.valueOf("1").equals(map.get("customer_type")) && "0".equals(map.get("papers_type"))){
+            } else if (!Integer.valueOf("1").equals(map.get("customer_type")) && "0".equals(map.get("papers_type"))) {
                 cells[20].setCellValue(new HSSFRichTextString("三证合一"));
-            }else if (!Integer.valueOf("1").equals(map.get("customer_type")) && "1".equals(map.get("papers_type"))){
+            } else if (!Integer.valueOf("1").equals(map.get("customer_type")) && "1".equals(map.get("papers_type"))) {
                 cells[20].setCellValue(new HSSFRichTextString("三证"));
             }
         }

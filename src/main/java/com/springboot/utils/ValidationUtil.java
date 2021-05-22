@@ -17,10 +17,11 @@ public class ValidationUtil {
     // 创建validator
     //failFast 属性设为true时校验到有错就返回,false时校验全部最后才返回
     private static Validator validator = Validation.byProvider(HibernateValidator.class).configure().
-                failFast(false).buildValidatorFactory().getValidator();
+            failFast(false).buildValidatorFactory().getValidator();
 
     /**
      * 校验对象
+     *
      * @param t      bean
      * @param groups 校验组
      * @return ValidResult

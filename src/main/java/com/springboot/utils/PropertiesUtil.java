@@ -19,8 +19,8 @@ public class PropertiesUtil {
             properties.load(in);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(in != null){
+        } finally {
+            if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {

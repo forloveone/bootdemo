@@ -18,11 +18,11 @@ class Father {
         System.out.println("fatherSay");
     }
 
-    public void doSomeThing(HashMap hashMap){
+    public void doSomeThing(HashMap hashMap) {
         System.out.println("父类doSomeThing方法执行");
     }
 
-    public void doSomeThing2(Map map){
+    public void doSomeThing2(Map map) {
         System.out.println("父类doSomeThing2方法执行");
     }
 }
@@ -37,11 +37,11 @@ class Son extends Father {
     }
 
     //子类入参放大了,这是重载(和父类的doSomeThing方法重载)不是覆写
-    public void doSomeThing(Map map){
+    public void doSomeThing(Map map) {
         System.out.println("子类doSomeThing方法执行");
     }
 
-    public void doSomeThing2(HashMap hashMap){
+    public void doSomeThing2(HashMap hashMap) {
         System.out.println("子类doSomeThing2方法执行");
     }
     //这才是复写

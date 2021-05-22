@@ -47,6 +47,7 @@ public class StringTest {
      */
     String str = new String("good");
     char[] ch = {'a', 'b', 'c'};
+
     @Test
     public void test2() {
         StringBuffer a = new StringBuffer("A");
@@ -248,11 +249,11 @@ public class StringTest {
 
 //        String mobile = "15010793767";
         String mobile = null;
-        System.out.println(StringUtils.rightPad(StringUtils.left(mobile, 3),7,"*"));
+        System.out.println(StringUtils.rightPad(StringUtils.left(mobile, 3), 7, "*"));
 
         //System.out.println(mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
-        System.out.println(RegExUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
-        System.out.println(StringUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(RegExUtils.replaceAll(mobile, "(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(StringUtils.replaceAll(mobile, "(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
 
 
     }

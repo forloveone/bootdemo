@@ -25,9 +25,11 @@ public class Base {
 
 class David extends Base {
     public String name = "David";
+
     public String getName() {
         return name;
     }
+
     public David() {
         tellName();
         printName();
@@ -42,7 +44,7 @@ class David extends Base {
     }
 }
 
-class TestTemp{
+class TestTemp {
     public static void main(String[] args) {
         Base david = new David();
         David david1 = (David) david;

@@ -18,8 +18,7 @@ public class PropertiesUtil2 {
 
     public String environment = "";
 
-    public PropertiesUtil2()
-    {
+    public PropertiesUtil2() {
         // 读取配置
         Properties pp = null;
         InputStream fis = null;

@@ -33,7 +33,7 @@ public class JavaWord {
     private FileOutputStream fos;
 
     private File testFileExists(File file) throws IOException {
-        if (!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         return file;
@@ -68,6 +68,7 @@ public class JavaWord {
             fos.close();
         }
     }
+
     @Test
     public void testReadWord2003() {
         // 直接通过getText()获取文本
@@ -169,9 +170,9 @@ public class JavaWord {
         XWPFRun run = paragraph.insertNewRun(0);
         run.setText("农联中新");
         run.addBreak();
-        run.setText("表名"+"("+"表中文名"+")");
+        run.setText("表名" + "(" + "表中文名" + ")");
 
-        XWPFTable table = doc.createTable(5,6);
+        XWPFTable table = doc.createTable(5, 6);
         XWPFTableRow row = table.getRow(0);
         row.getCell(0).setText("字段名");
         row.getCell(1).setText("类型");
@@ -185,7 +186,7 @@ public class JavaWord {
         XWPFRun run2 = paragraph2.insertNewRun(0);
         run2.addBreak();
 
-        XWPFTable table2 = doc.createTable(5,6);
+        XWPFTable table2 = doc.createTable(5, 6);
         XWPFTableRow row2 = table2.getRow(0);
         row2.getCell(0).setText("字段名");
         row2.getCell(1).setText("类型");
@@ -198,24 +199,24 @@ public class JavaWord {
     }
 
     @Test
-    public void test5(){
+    public void test5() {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://rm-pz5mujrn0fnzkq38wo.mysql.rds.aliyuncs.com:3306/nlzx_dev", "nlzx_dev", "nlzx@59561748");
             conn.setAutoCommit(false);
-            String sql ="SELECT table_name,table_comment from information_schema.TABLES WHERE table_schema = ? AND table_type = ?";
+            String sql = "SELECT table_name,table_comment from information_schema.TABLES WHERE table_schema = ? AND table_type = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "nlzx_dev");
             ps.setString(2, "base table");
 
             ResultSet rs = ps.executeQuery();
             int count = 0;
-            while(rs.next()){
+            while (rs.next()) {
                 count++;
                 String tabName = rs.getString("table_name");
                 String tabComment = rs.getString("table_comment");
-                System.out.println(tabName+"    "+tabComment);
+                System.out.println(tabName + "    " + tabComment);
             }
             conn.commit();
         } catch (Exception e) {

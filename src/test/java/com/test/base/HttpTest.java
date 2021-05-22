@@ -26,7 +26,7 @@ import java.net.URL;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SpringBootRun.class )
+@SpringBootTest(classes = SpringBootRun.class)
 public class HttpTest {
 
     @Autowired
@@ -92,7 +92,7 @@ public class HttpTest {
      * spring restTemplate 模式
      */
     @Test
-    public void spring(){
+    public void spring() {
         ResponseEntity<String> response = restTemplate.getForEntity("http://www.baidu.com", String.class);
         System.out.println(response.getBody());
     }

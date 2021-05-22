@@ -56,18 +56,18 @@ public class SearchTest {
         return -min - 1;
     }
 
-    private int[] intsTemp = {2,6,8,10,13,25,36,45,53,76,88,100,127};
+    private int[] intsTemp = {2, 6, 8, 10, 13, 25, 36, 45, 53, 76, 88, 100, 127};
 
-    public int bsearch(int[] array,int v){
-        int left ,right, middle;
+    public int bsearch(int[] array, int v) {
+        int left, right, middle;
         left = 0;
-        right = array.length-1;
+        right = array.length - 1;
 
-        while(left <= right){
-            middle = left + (right- left)/2; //middle 计算有问题会导致一直循环
-            if (array[middle] >v){
+        while (left <= right) {
+            middle = left + (right - left) / 2; //middle 计算有问题会导致一直循环
+            if (array[middle] > v) {
                 right = middle;
-            } else if (array[middle] < v){
+            } else if (array[middle] < v) {
                 left = middle;
             } else {
                 return middle;

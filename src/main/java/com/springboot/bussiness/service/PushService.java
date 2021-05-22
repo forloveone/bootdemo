@@ -17,7 +17,7 @@ public class PushService {
     @Scheduled(fixedDelay = 5000)
     public void refresh() {
         if (deferredResult != null) {
-            deferredResult.setResult(System.currentTimeMillis()+"");
+            deferredResult.setResult(System.currentTimeMillis() + "");
         }
     }
 

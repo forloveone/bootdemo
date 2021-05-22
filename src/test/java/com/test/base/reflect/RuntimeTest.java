@@ -11,9 +11,9 @@ public class RuntimeTest {
     @Test
     public void test() throws IOException {
 //        String [] cmd={"cmd","/C","copy exe1 exe2"};
-        String [] cmd={"cmd","/C",""};
-        Process proc =Runtime.getRuntime().exec("javac");
-        int exitVal = proc.exitValue ();
-        System.out.println ("Process exitValue: " + exitVal);
+        String[] cmd = {"cmd", "/C", ""};
+        Process proc = Runtime.getRuntime().exec("javac");
+        int exitVal = proc.exitValue();
+        System.out.println("Process exitValue: " + exitVal);
     }
 }

@@ -1,4 +1,5 @@
 package com.test.base.pojo.xml;
+
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -18,6 +19,7 @@ public class RequestParamConverter implements Converter {
         writer.setValue(attr.getVal());
         // writer.endNode();
     }
+
     /**
      * 将xml转为java对象使用
      */

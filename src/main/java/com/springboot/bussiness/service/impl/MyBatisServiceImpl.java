@@ -55,15 +55,15 @@ public class MyBatisServiceImpl implements MyBatisService {
      * 这种批量插入比for循环中单条插入,每百条提交一次性能好的多,尤其在数据量很大的时候,
      * mysql默认接受sql的大小是1048576(1M)，若数据量(sql太长导致)超过1M会报如下异常：Packet for query is too large
      * （可通过调整MySQL安装目录下的my.ini文件中[mysqld]段的＂max_allowed_packet = 1M＂）
-     *
+     * <p>
      * 也支持回滚
      */
     @Override
     @Transactional
     public void batchInsert() {
         List<User> list = new ArrayList<>();
-        User u1 = new User("batch1","batchPassword1",new Date());
-        User u2 = new User("batch2","batchPassword2",new Date());
+        User u1 = new User("batch1", "batchPassword1", new Date());
+        User u2 = new User("batch2", "batchPassword2", new Date());
         list.add(u1);
         list.add(u2);
         boolean flag = userMapper.batchInsert(list);

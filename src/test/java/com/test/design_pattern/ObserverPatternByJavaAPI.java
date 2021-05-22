@@ -58,12 +58,13 @@ class ObserverTemp implements Observer {
     }
 
     /**
-     *  观察者必须实现的方法
-     * @param o the observable object
+     * 观察者必须实现的方法
+     *
+     * @param o   the observable object
      * @param arg
      */
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("观察者收到被观察者状态变化"+ o +"   "+ arg);
+        System.out.println("观察者收到被观察者状态变化" + o + "   " + arg);
     }
 }

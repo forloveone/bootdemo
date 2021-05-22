@@ -12,33 +12,33 @@ spring:
       enabled: true
       additional-paths: src/main/java
       exclude: WEB-INF/**
-#  激活其他配置文件
-#  profiles:
-#    active: dev
+  #  激活其他配置文件
+  #  profiles:
+  #    active: dev
 
-# redis 配置
+  # redis 配置
   #哨兵模式只需要配置下就好
   redis:
-      #地址
-      host: 127.0.0.1
-      #端口号
-      port: 6379
-      #密码
-      password:
-      #默认数据库
-      database: 1
-      lettuce:
-        #连接池配置
-        pool:
-          #最大连接数
-          max-active: 32
-          #等待时间
-          max-wait: 300ms
-          #最大空闲
-          max-idle: 16
-          #最小空闲
-          min-idle: 8
-      timeout: 100ms
+    #地址
+    host: 127.0.0.1
+    #端口号
+    port: 6379
+    #密码
+    password:
+    #默认数据库
+    database: 1
+    lettuce:
+      #连接池配置
+      pool:
+        #最大连接数
+        max-active: 32
+        #等待时间
+        max-wait: 300ms
+        #最大空闲
+        max-idle: 16
+        #最小空闲
+        min-idle: 8
+    timeout: 100ms
   # mysql 本地源
   datasource:
     url: jdbc:mysql://localhost:33306/test?serverTimezone=Asia/Shanghai
@@ -47,54 +47,54 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     #type: com.alibaba.druid.pool.DruidDataSource
-#  datasource:
-#      druid:
-#        # http://localhost:9091/demo/druid/index.html
-#        url: jdbc:mysql://127.0.0.1:33306/test?serverTimezone=Asia/Shanghai
-#        username: root
-#        password: 123456
-#        driver-class-name: com.mysql.jdbc.Driver
-#        #连接池配置
-#        #初始链接数,在连接池被创建的时候初始化的连接数
-#        initial-size: 5
-#        #最大连接池数量
-#        max-active: 100
-#        #最小连接数
-#        min-idle: 5
-#        #超时等待时间
-#        max-wait: 60000
-#        pool-prepared-statements: true
-#        max-pool-prepared-statement-per-connection-size: 20
-#        validation-query: SELECT 1 FROM DUAL
-#        validation-query-timeout: 60000
-#        test-on-borrow: false
-#        test-on-return: false
-#        test-while-idle: true
-#        time-between-connect-error-millis: 60000
-#        min-evictable-idle-time-millis: 100000
-#        filters: stat,wall,log4j2
-#        web-stat-filter:
-#          enabled: true
-#          url-pattern: /*
-#          exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-#        stat-view-servlet:
-#          enabled: true
-#          url-pattern: /druid/*
-#          reset-enable: false
-#          login-username: admin
-#          login-password: admin
-#          allow: 127.0.0.1
-#        filter:
-#          stat:
-#            db-type: mysql
-#            log-slow-sql: true
-#            slow-sql-millis: 5000
-#          wall:
-#            enabled: true
-#            db-type: mysql
-#            config:
-#              delete-allow: false
-#              drop-table-allow: false
+  #  datasource:
+  #      druid:
+  #        # http://localhost:9091/demo/druid/index.html
+  #        url: jdbc:mysql://127.0.0.1:33306/test?serverTimezone=Asia/Shanghai
+  #        username: root
+  #        password: 123456
+  #        driver-class-name: com.mysql.jdbc.Driver
+  #        #连接池配置
+  #        #初始链接数,在连接池被创建的时候初始化的连接数
+  #        initial-size: 5
+  #        #最大连接池数量
+  #        max-active: 100
+  #        #最小连接数
+  #        min-idle: 5
+  #        #超时等待时间
+  #        max-wait: 60000
+  #        pool-prepared-statements: true
+  #        max-pool-prepared-statement-per-connection-size: 20
+  #        validation-query: SELECT 1 FROM DUAL
+  #        validation-query-timeout: 60000
+  #        test-on-borrow: false
+  #        test-on-return: false
+  #        test-while-idle: true
+  #        time-between-connect-error-millis: 60000
+  #        min-evictable-idle-time-millis: 100000
+  #        filters: stat,wall,log4j2
+  #        web-stat-filter:
+  #          enabled: true
+  #          url-pattern: /*
+  #          exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  #        stat-view-servlet:
+  #          enabled: true
+  #          url-pattern: /druid/*
+  #          reset-enable: false
+  #          login-username: admin
+  #          login-password: admin
+  #          allow: 127.0.0.1
+  #        filter:
+  #          stat:
+  #            db-type: mysql
+  #            log-slow-sql: true
+  #            slow-sql-millis: 5000
+  #          wall:
+  #            enabled: true
+  #            db-type: mysql
+  #            config:
+  #              delete-allow: false
+  #              drop-table-allow: false
 
   rabbitmq:
     host: localhost

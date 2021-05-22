@@ -58,22 +58,22 @@ class DynamicProxy<T> {
     }
 }
 
-class SubjectDynamicProxy extends DynamicProxy{
-    public static<T> T newProxyInstance(Subject subject){
+class SubjectDynamicProxy extends DynamicProxy {
+    public static <T> T newProxyInstance(Subject subject) {
         ClassLoader classLoader = subject.getClass().getClassLoader();
         Class<?>[] interfaces = subject.getClass().getInterfaces();
         //适用这样的好处是消除了模板代码
         InvocationHandler handler = new Handler(subject);
-        return newProxyInstance(classLoader,interfaces,handler);
+        return newProxyInstance(classLoader, interfaces, handler);
     }
 }
 
-class ClientTest{
+class ClientTest {
     public static void main(String[] args) {
         Subject subject = new SubjectImpl();
 //        Handler handler = new Handler(subject);
 //        Subject proxy = DynamicProxy.newProxyInstance(subject.getClass().getClassLoader(),subject.getClass().getInterfaces(),handler);
-        Subject proxy =SubjectDynamicProxy.newProxyInstance(subject);
+        Subject proxy = SubjectDynamicProxy.newProxyInstance(subject);
         proxy.doSomething("helllo 动态代理");
         //动态代理,就是实现了不改变已有代码结构的情况下增强或控制对象的行为.
     }

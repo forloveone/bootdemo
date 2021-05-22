@@ -12,8 +12,9 @@ public class Person2 {
     private int age;
 
     private List<Person2> person2List = new ArrayList<>();
+
     @Before
-    public void init(){
+    public void init() {
         Person2 p = new Person2();
         p.setAge(10);
         Person2 p2 = new Person2();
@@ -28,6 +29,7 @@ public class Person2 {
         boolean equals = p.equals(p2);
         System.out.println(equals);
     }
+
     @Test
     public void test() {
         person2List.sort(new ComparePersonByAgeAsc());

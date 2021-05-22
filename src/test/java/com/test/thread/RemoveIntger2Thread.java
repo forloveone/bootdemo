@@ -11,7 +11,7 @@ public class RemoveIntger2Thread implements Callable<List> {
         this.list = list;
     }
 
-    public List<Integer> getList(){
+    public List<Integer> getList() {
         return list;
     }
 

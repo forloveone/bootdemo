@@ -94,7 +94,7 @@ public class JsonTest {
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         String json = "[\n" +
                 "  {\n" +
                 "    \"tag\": \"call\",\n" +
