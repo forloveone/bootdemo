@@ -1,9 +1,9 @@
 package com.test.cache;
 
-import com.springboot.SpringBootRun;
-import com.springboot.bussiness.pojo.Person;
-import com.springboot.bussiness.pojo.TestPojo;
-import com.springboot.utils.RedisUtil;
+import com.dujinyue.SpringBootRun;
+import com.dujinyue.bussiness.pojo.Person;
+import com.dujinyue.bussiness.pojo.TestPojo;
+import com.dujinyue.utils.RedisUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

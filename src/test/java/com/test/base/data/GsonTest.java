@@ -2,7 +2,7 @@ package com.test.base.data;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import com.springboot.utils.RuntimeTypeAdapterFactory;
+import com.dujinyue.utils.RuntimeTypeAdapterFactory;
 import com.test.base.class_relationship.JsonF;
 import com.test.base.class_relationship.JsonS;
 import com.test.base.class_relationship.JsonS2;

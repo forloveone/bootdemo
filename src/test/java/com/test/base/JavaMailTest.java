@@ -1,6 +1,6 @@
 package com.test.base;
 
-import com.springboot.SpringBootRun;
+import com.dujinyue.SpringBootRun;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.test.base.data;
 
-import com.springboot.utils.PinYinUtil;
+import com.dujinyue.utils.PinYinUtil;
 import org.junit.Test;
 
 public class HanYuTest {

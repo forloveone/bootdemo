@@ -13,8 +13,8 @@ spring:
       additional-paths: src/main/java
       exclude: WEB-INF/**
 #  激活其他配置文件
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
 
 # redis 配置
   #哨兵模式只需要配置下就好

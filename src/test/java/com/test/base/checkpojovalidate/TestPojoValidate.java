@@ -1,6 +1,6 @@
 package com.test.base.checkpojovalidate;
 
-import com.springboot.utils.ValidationUtil;
+import com.dujinyue.utils.ValidationUtil;
 import org.junit.Before;
 import org.junit.Test;
 

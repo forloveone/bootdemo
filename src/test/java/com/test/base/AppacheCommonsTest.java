@@ -492,7 +492,7 @@ public class AppacheCommonsTest {
 //        HttpPost httpPost = new HttpPost("http://localhost:12345/doPostControllerFour" + "?" + sb);
         HttpPost httpPost = new HttpPost("http://localhost:9091/demo/testController/testHttpclient" + "?" + "name=test");
         Gson gson = new Gson();
-        com.springboot.bussiness.pojo.Person person = new com.springboot.bussiness.pojo.Person();
+        com.dujinyue.bussiness.pojo.Person person = new com.dujinyue.bussiness.pojo.Person();
         person.setAddress("123");
         person.setAge("11");
         person.setName("a");

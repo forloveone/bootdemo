@@ -5,7 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.RateLimiter;
-import com.springboot.bussiness.controller.GuavaController;
+import com.dujinyue.bussiness.controller.GuavaController;
 import org.junit.Test;
 
 import java.util.UUID;

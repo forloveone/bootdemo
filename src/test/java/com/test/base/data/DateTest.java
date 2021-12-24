@@ -1,6 +1,6 @@
 package com.test.base.data;
 
-import com.springboot.utils.DateUtil;
+import com.dujinyue.utils.DateUtil;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;

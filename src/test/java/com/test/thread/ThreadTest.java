@@ -13,8 +13,8 @@ public class ThreadTest {
     /**
      * sleep join
      *
-     * @see com.springboot.utils.RedisUtil#getExpire(String key)
-     * 提升幸福感的标签{@link com.springboot.utils.RedisUtil#getExpire(String key)}
+     * @see com.dujinyue.utils.RedisUtil#getExpire(String key)
+     * 提升幸福感的标签{@link com.dujinyue.utils.RedisUtil#getExpire(String key)}
      */
     @Test
     public void test() throws InterruptedException {

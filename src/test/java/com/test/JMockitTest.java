@@ -1,6 +1,6 @@
 package com.test;
 
-import com.springboot.HelloJMockit;
+import com.dujinyue.HelloJMockit;
 import mockit.*;
 import org.junit.Test;
 

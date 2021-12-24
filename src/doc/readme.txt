@@ -43,7 +43,7 @@
     //sonar 代码审查
     //Junit 单元测试 PowerMock
     //springcloud
-    //内部类的应用? com.springboot.class_relationship.Outer
+    //内部类的应用? com.dujinyue.class_relationship.Outer
     //execution 详解 复杂的aop能实现什么? aop 不能用拦截器吗? AspectJTest
 
 
