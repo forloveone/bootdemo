@@ -50,6 +50,16 @@ public class DateTest {
         System.out.println(sdf.format(calendar.getTime()));
     }
 
+    @Test
+    public void test11() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 3);
+        System.out.println(calendar.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(calendar.getTime());
+        System.out.println(format);
+    }
+
     /**
      * 判断某个日期是当前的最后一天
      */
@@ -75,5 +85,14 @@ public class DateTest {
         Date parse = sdf.parse("2020-02-13 00:00:00");
         System.out.println(parse);
 
+    }
+
+    @Test
+    public void test8() {
+        Date date = new Date(1629302399000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        String format = sdf.format(date);
+        System.out.println(format);
     }
 }

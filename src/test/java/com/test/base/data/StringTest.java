@@ -1,11 +1,14 @@
 package com.test.base.data;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -323,5 +326,50 @@ public class StringTest {
     public void testHash() {
         String str = "1234kjadjfk";
         System.out.println(str.hashCode());
+    }
+
+    @Test
+    public void testWhite(){
+        String str = "    ";
+        String trim = str.trim();
+        System.out.println(trim);
+    }
+
+    @Test
+    public void match(){
+        String path = "http://localhost:8097/MID-PLATFORM-ABILITY-SERVICE/catalog/searchProductList";
+        String path2 = "http://117.78.10.90:45000/api/swagger-ui.html/swagger-resources/configuration/ui";
+        String test = path2.toLowerCase();
+        System.out.println(test);
+        String no_authurl = ".*/((login)|(special)|(static)|(query4a)|(ws4a)|(swagger-ui.html)|(v2)|(abilityinstallationreturninfo)|(catalog/searchproductlist)).*";
+        System.out.println(test.matches(no_authurl));
+    }
+
+    @Test
+    public void timeTest(){
+        System.out.println(new Date().getTime());
+    }
+
+    @Test
+    public void stringReplace(){
+        String t =  "%s哈哈";
+        String test = String.format(t, "test");
+        System.out.println(test);
+    }
+
+    @Test
+    public void test22(){
+        String s = "{\"processId\":10182623,\"key\":\"SJ-20210816-0-02786\",\"code\":200}";
+        Map<String, String> map = JSON.parseObject(s, Map.class);
+        String processId = map.get("processId");
+        String processCode = map.get("key");
+        System.out.println();
+
+    }
+    @Test
+    public void test3(){
+        String s =  "http://49.4.2.180:6753/uflow/event/viewProcess.do?processId=%s&account=%s";
+        s = String.format(s, "123", "123");
+        System.out.println(s);
     }
 }
