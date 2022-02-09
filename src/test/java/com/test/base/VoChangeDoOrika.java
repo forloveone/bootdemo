@@ -80,7 +80,7 @@ public class VoChangeDoOrika {
 
 
         factory.classMap(SourceA.class, DestinationB.class)
-                    .fieldMap("date", "dateb").converter("dateConverter").add()
+                .fieldMap("date", "dateb").converter("dateConverter").add()
                 .register();
         MapperFacade mapperFacade = factory.getMapperFacade();
         SourceA sourceA = new SourceA();
@@ -90,7 +90,7 @@ public class VoChangeDoOrika {
 
     class MyConverter extends BidirectionalConverter<String, Date> {
 
-        private SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         @Override
         public Date convertTo(String s, Type<Date> type) {

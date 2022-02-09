@@ -50,6 +50,7 @@ class CommandImpl extends Command {
     public CommandImpl() {
         super(new Receiver());
     }
+
     public CommandImpl(Receiver receiver) {
         super(receiver);
     }

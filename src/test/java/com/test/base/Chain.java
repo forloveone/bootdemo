@@ -47,7 +47,7 @@ public class Chain {
     }
 
     @Test
-    public void test(){
+    public void test() {
         Chain c = new Chain();
         c.setAddress("地球").setIdCard("409097877656").setName("链式编程");
         System.out.println(c);

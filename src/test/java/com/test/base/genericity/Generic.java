@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * 应对一个需求
- *
+ * <p>
  * 泛型的类型参数只能是类类型（包括自定义类），不能是简单类型
  */
 public class Generic {
@@ -50,7 +50,7 @@ public class Generic {
     /**
      * 反射获得一个属性的值
      */
-    private <T> void reflect(T obj) throws Exception{
+    private <T> void reflect(T obj) throws Exception {
         Field field = obj.getClass().getDeclaredField("name");
         field.setAccessible(true);
         Object val = field.get(obj);

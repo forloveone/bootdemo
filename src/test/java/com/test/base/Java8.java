@@ -63,7 +63,7 @@ public class Java8 {
      * Steam API极大得简化了集合操作
      */
     @Test
-    public void streamApi(){
+    public void streamApi() {
 
     }
 }

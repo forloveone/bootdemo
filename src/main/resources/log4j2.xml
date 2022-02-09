@@ -14,7 +14,8 @@
         </console>
 
         <!-- INFO级别日志 按天输出到文件，归类到年月目录 -->
-        <RollingFile name="RollingFileInfo" fileName="${log.path}/info.log" filePattern="${log.path}/logs/${date:yyyy-MM}/info-%d{yyyy-MM-dd}.log.zip">
+        <RollingFile name="RollingFileInfo" fileName="${log.path}/info.log"
+                     filePattern="${log.path}/logs/${date:yyyy-MM}/info-%d{yyyy-MM-dd}.log.zip">
             <PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n"/>
             <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -23,7 +24,8 @@
             </Policies>
         </RollingFile>
 
-        <RollingFile name="RollingFileError" fileName="${log.path}/error.log" filePattern="${log.path}/logs/${date:yyyy-MM}/error-%d{yyyy-MM-dd}.log.zip">
+        <RollingFile name="RollingFileError" fileName="${log.path}/error.log"
+                     filePattern="${log.path}/logs/${date:yyyy-MM}/error-%d{yyyy-MM-dd}.log.zip">
             <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <PatternLayout pattern="[%date{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%level][%class][%line]:%message%n"/>
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>

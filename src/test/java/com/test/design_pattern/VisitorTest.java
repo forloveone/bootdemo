@@ -74,6 +74,7 @@ interface IVisitor {
  */
 class Visitor implements IVisitor {
     public int numberC1;
+
     //访问 concreteElement
     @Override
     public void visit(ConcreteElement concreteElement) {

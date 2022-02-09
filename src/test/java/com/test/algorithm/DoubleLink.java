@@ -40,18 +40,18 @@ public class DoubleLink<T> {
 
     // 返回链表是否为空
     public boolean isEmpty() {
-        return mCount==0;
+        return mCount == 0;
     }
 
     // 获取第index位置的节点
     private DNode<T> getNode(int index) {
-        if (index<0 || index>=mCount)
+        if (index < 0 || index >= mCount)
             throw new IndexOutOfBoundsException();
 
         // 正向查找
-        if (index <= mCount/2) {
+        if (index <= mCount / 2) {
             DNode<T> node = mHead.next;
-            for (int i=0; i<index; i++)
+            for (int i = 0; i < index; i++)
                 node = node.next;
 
             return node;
@@ -59,8 +59,8 @@ public class DoubleLink<T> {
 
         // 反向查找
         DNode<T> rnode = mHead.prev;
-        int rindex = mCount - index -1;
-        for (int j=0; j<rindex; j++)
+        int rindex = mCount - index - 1;
+        for (int j = 0; j < rindex; j++)
             rnode = rnode.prev;
 
         return rnode;
@@ -78,17 +78,17 @@ public class DoubleLink<T> {
 
     // 获取最后一个节点的值
     public T getLast() {
-        return getNode(mCount-1).value;
+        return getNode(mCount - 1).value;
     }
 
     // 将节点插入到第index位置之前
     public void insert(int index, T t) {
-        if (index==0) {
+        if (index == 0) {
             DNode<T> node = new DNode<T>(t, mHead, mHead.next);
             mHead.next.prev = node;
             mHead.next = node;
             mCount++;
-            return ;
+            return;
         }
 
         DNode<T> inode = getNode(index);
@@ -96,7 +96,7 @@ public class DoubleLink<T> {
         inode.prev.next = tnode;
         inode.next = tnode;
         mCount++;
-        return ;
+        return;
     }
 
     // 将节点插入第一个节点处。
@@ -128,6 +128,6 @@ public class DoubleLink<T> {
 
     // 删除最后一个节点
     public void deleteLast() {
-        del(mCount-1);
+        del(mCount - 1);
     }
 }

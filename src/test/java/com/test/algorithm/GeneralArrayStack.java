@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 /**
  * Java : 数组实现的栈，能存储任意类型的数据
  * java 中实现的 java.util.Stack
+ *
  * @author skywang
  * @date 2013/11/07
  */

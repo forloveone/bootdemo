@@ -6,14 +6,14 @@ package com.test.jvm;
 public class StackSOF {
     private int length = 1;
 
-    public void stackLeak(){
+    public void stackLeak() {
         length++;
         stackLeak();
     }
 
     /**
-     *
      * -Xss128k
+     *
      * @param args
      */
     public static void main(String[] args) {

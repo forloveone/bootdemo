@@ -71,10 +71,10 @@ public class ListTest {
     }
 
     /**
-     *  对list<pojo>去重 需要pojo 重写hashcode和equals
+     * 对list<pojo>去重 需要pojo 重写hashcode和equals
      */
     @Test
-    public void testPojo(){
+    public void testPojo() {
         List<Person> personList = new ArrayList<>();
         Person p1 = new Person();
         p1.setAge(10);
@@ -165,7 +165,7 @@ public class ListTest {
      * java 8 分片操作
      */
     @Test
-    public void fenpian(){
+    public void fenpian() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         int limit = countStep(list.size());
         //方法一：使用流遍历操作
@@ -183,6 +183,7 @@ public class ListTest {
         System.out.println(splitList);
 
     }
+
     private static Integer countStep(Integer size) {
         return (size + MAX_NUMBER - 1) / MAX_NUMBER;
     }
@@ -249,14 +250,14 @@ public class ListTest {
         b.add(6);
         b.add(8);
 
-        aPojos.add(new Stu("w1",21));
-        aPojos.add(new Stu("w1",21));
-        aPojos.add(new Stu("w2",21));
-        aPojos.add(new Stu("w3",21));
-        aPojos.add(new Stu("w1",22));
+        aPojos.add(new Stu("w1", 21));
+        aPojos.add(new Stu("w1", 21));
+        aPojos.add(new Stu("w2", 21));
+        aPojos.add(new Stu("w3", 21));
+        aPojos.add(new Stu("w1", 22));
 
-        bPojos.add(new Stu("w3",21));
-        bPojos.add(new Stu("w1",21));
+        bPojos.add(new Stu("w3", 21));
+        bPojos.add(new Stu("w1", 21));
     }
 
     /**
@@ -333,7 +334,7 @@ public class ListTest {
     }
 
     @Test
-    public void testgg(){
+    public void testgg() {
         List<Stu> aPojos2 = this.aPojos;
         差集();
         System.out.println(this.aPojos);

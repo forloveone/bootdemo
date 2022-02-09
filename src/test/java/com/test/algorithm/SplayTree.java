@@ -374,17 +374,17 @@ public class SplayTree<T extends Comparable<T>> {
             print(mRoot, mRoot.key, 0);
     }
 
-    private static final int arr[] = {10,50,40,30,20,60};
+    private static final int arr[] = {10, 50, 40, 30, 20, 60};
 
     @Test
     public void test() {
         int i, ilen;
-        SplayTree<Integer> tree=new SplayTree<Integer>();
+        SplayTree<Integer> tree = new SplayTree<Integer>();
 
         System.out.print("== 依次添加: ");
         ilen = arr.length;
-        for(i=0; i<ilen; i++) {
-            System.out.print(arr[i]+" ");
+        for (i = 0; i < ilen; i++) {
+            System.out.print(arr[i] + " ");
             tree.insert(arr[i]);
         }
 
@@ -398,8 +398,8 @@ public class SplayTree<T extends Comparable<T>> {
         tree.postOrder();
         System.out.println();
 
-        System.out.println("== 最小值: "+ tree.minimum());
-        System.out.println("== 最大值: "+ tree.maximum());
+        System.out.println("== 最小值: " + tree.minimum());
+        System.out.println("== 最大值: " + tree.maximum());
         System.out.println("== 树的详细信息: ");
         tree.print();
 

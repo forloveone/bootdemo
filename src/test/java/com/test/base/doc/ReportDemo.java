@@ -37,16 +37,16 @@ public class ReportDemo {
     @Test
     public void test() throws IOException {
         HSSFWorkbook excel = new HSSFWorkbook();
-        HSSFSheet sheet= excel.createSheet("报表");
+        HSSFSheet sheet = excel.createSheet("报表");
 
         this.chineseCharacter();
         DefaultPieDataset data = this.dataCollection();
 
-        JFreeChart chart = ChartFactory.createPieChart("测试饼状图",data,true,true,true);
+        JFreeChart chart = ChartFactory.createPieChart("测试饼状图", data, true, true, true);
 
         //ChartUtilities.saveChartAsJPEG(new File("E:\\pie01.jpg"), chart, 800, 400);//直接保存为图片
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ChartUtilities.writeChartAsJPEG(out,chart,800,400);
+        ChartUtilities.writeChartAsJPEG(out, chart, 800, 400);
 
         // 画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）
         HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
@@ -63,20 +63,20 @@ public class ReportDemo {
     }
 
     //jfreechart 生成图片乱码
-    private void chineseCharacter(){
+    private void chineseCharacter() {
         //创建主题样式
-        StandardChartTheme standardChartTheme=new StandardChartTheme("CN");
+        StandardChartTheme standardChartTheme = new StandardChartTheme("CN");
         //设置标题字体
-        standardChartTheme.setExtraLargeFont(new Font("隶书",Font.BOLD,20));
+        standardChartTheme.setExtraLargeFont(new Font("隶书", Font.BOLD, 20));
         //设置图例的字体
-        standardChartTheme.setRegularFont(new Font("宋书",Font.PLAIN,15));
+        standardChartTheme.setRegularFont(new Font("宋书", Font.PLAIN, 15));
         //设置轴向的字体
-        standardChartTheme.setLargeFont(new Font("宋书",Font.PLAIN,15));
+        standardChartTheme.setLargeFont(new Font("宋书", Font.PLAIN, 15));
         //应用主题样式
         ChartFactory.setChartTheme(standardChartTheme);//设置中文显示
     }
 
-    private DefaultPieDataset dataCollection(){
+    private DefaultPieDataset dataCollection() {
         DefaultPieDataset defaultpiedataset = new DefaultPieDataset();
         defaultpiedataset.setValue("我们", new Double(43.2));
         defaultpiedataset.setValue("Two", new Double(10.0));
@@ -201,7 +201,7 @@ public class ReportDemo {
         MeterPlot plot = new MeterPlot(data);
         Field field = plot.getClass().getDeclaredField("DEFAULT_METER_ANGLE");
         field.setAccessible(true);
-        field.setInt((Object) plot,180);
+        field.setInt((Object) plot, 180);
         plot.setDialShape(DialShape.CHORD);
         plot.setDialBackgroundPaint(Color.WHITE);
         plot.setRange(new Range(0, 180));
@@ -213,7 +213,7 @@ public class ReportDemo {
         plot.setTickLabelFormat(NumberFormat.getNumberInstance());
         plot.setTickSize(10);
         plot.setValuePaint(Color.BLACK);
-        plot.addInterval(new MeterInterval("Low", new Range(0, 45), null, null,new Color(171, 4, 1, 243) ));
+        plot.addInterval(new MeterInterval("Low", new Range(0, 45), null, null, new Color(171, 4, 1, 243)));
         plot.addInterval(new MeterInterval("Normal", new Range(45, 90), null, null, new Color(251, 143, 18, 254)));
         plot.addInterval(new MeterInterval("High", new Range(90, 125), null, null, new Color(24, 58, 156, 235)));
         plot.addInterval(new MeterInterval("4", new Range(125, 180), null, null, new Color(18, 156, 35, 235)));

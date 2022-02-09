@@ -25,9 +25,11 @@ public class Base {
 
 class David extends Base {
     public String name = "David";
+
     public String getName() {
         return name;
     }
+
     public David() {
         tellName();
         printName();
@@ -40,20 +42,9 @@ class David extends Base {
     public void printName() {
         System.out.println("David print name " + name);
     }
+}
 
-    /**
-     * Base tell name base
-     * David print name null
-     * base
-     * David tell name David
-     * David print name David
-     *
-     * base
-     * David
-     *
-     * base
-     * David
-     */
+class TestTemp {
     public static void main(String[] args) {
         Base david = new David();
         David david1 = (David) david;

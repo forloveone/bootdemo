@@ -4,13 +4,13 @@ package com.test.jvm;
  * 栈内存溢出
  */
 public class StackOOM {
-    private void dontStop(){
+    private void dontStop() {
         while (true) {
 
         }
     }
 
-    public void stackLeakByThread(){
+    public void stackLeakByThread() {
         while (true) {
             Thread t = new Thread(new Runnable() {
                 @Override

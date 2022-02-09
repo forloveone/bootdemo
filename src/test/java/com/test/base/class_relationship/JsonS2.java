@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JsonS2 extends JsonF{
+public class JsonS2 extends JsonF {
     private String sName;
     private int sAge;
     private String test;

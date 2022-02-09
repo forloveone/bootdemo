@@ -19,14 +19,16 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({FIELD})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {DateValidator.DateValidatorInner.class}) //validateBy 的值就是校验逻辑的实现类，实现类必须实现接口ConstraintValidator
+@Constraint(validatedBy = {DateValidator.DateValidatorInner.class})
+//validateBy 的值就是校验逻辑的实现类，实现类必须实现接口ConstraintValidator
 public @interface DateValidator {
 
     /**
      * 必须的属性
      * 显示 校验信息
      * 利用 {} 获取 属性值，参考了官方的message编写方式
-     *@see org.hibernate.validator 静态资源包里面 message 编写方式
+     *
+     * @see org.hibernate.validator 静态资源包里面 message 编写方式
      */
     String message() default "日期格式不匹配{dateFormat}";
 
@@ -56,6 +58,7 @@ public @interface DateValidator {
 
         /**
          * 校验逻辑的实现
+         *
          * @param value 需要校验的 值
          * @return 布尔值结果
          */
@@ -64,7 +67,7 @@ public @interface DateValidator {
             if (value == null) {
                 return false;
             }
-            if("".equals(value)){
+            if ("".equals(value)) {
                 return false;
             }
             try {

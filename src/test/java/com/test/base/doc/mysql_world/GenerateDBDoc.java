@@ -51,8 +51,9 @@ public class GenerateDBDoc {
     private String user = "nlzx_dev02";
     private String password = "nlzx_dev02@cicnl.cn";
 
-    private String table_schema ="nlzx_dev";
+    private String table_schema = "nlzx_dev";
     private String table_type = "base table";
+
     @Test
     public void createDBDoc() {
         createMysqlWord();
@@ -76,7 +77,7 @@ public class GenerateDBDoc {
 
             String sql2 = "SELECT COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE,COLUMN_KEY,COLUMN_COMMENT FROM information_schema.COLUMNS WHERE table_schema = ? AND table_name = ?";
             PreparedStatement ps2 = conn.prepareStatement(sql2);
-            ps2.setString(1,table_schema);
+            ps2.setString(1, table_schema);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

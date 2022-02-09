@@ -11,15 +11,18 @@ public enum Color {
     // 成员变量
     private String name;
     private int index;
+
     // 构造方法
     private Color(String name, int index) {
         this.name = name;
         this.index = index;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public int getIndex(){
+
+    public int getIndex() {
         return index;
     }
 

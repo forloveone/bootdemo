@@ -47,7 +47,8 @@ public class ExtendsTest {
         b.doA();
         c.doA();
     }
-//--------------------------------------------
+
+    //--------------------------------------------
     class PersonFather {
         private String name = "person";
 

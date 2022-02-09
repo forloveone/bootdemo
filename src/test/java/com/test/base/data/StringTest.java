@@ -16,9 +16,6 @@ import java.util.regex.Pattern;
 
 public class StringTest {
 
-    String str = new String("good");
-    char[] ch = {'a', 'b', 'c'};
-
     /**
      * split test
      */
@@ -51,6 +48,9 @@ public class StringTest {
      * Java对对象采用的不是引用调用，实际上，对象引用进行的是值传递
      * Java总是采用按值调用。方法得到的是所有参数值的一个拷贝，特别的，方法不能修改传递给它的任何参数变量的内容。
      */
+    String str = new String("good");
+    char[] ch = {'a', 'b', 'c'};
+
     @Test
     public void test2() {
         StringBuffer a = new StringBuffer("A");
@@ -78,9 +78,8 @@ public class StringTest {
         y = x;
     }
 
-    //
     private void change(String str2, char[] ch2) {
-        str = "test ok";
+        str2 = "test ok";
         ch[0] = 'g';
     }
 
@@ -253,11 +252,11 @@ public class StringTest {
 
 //        String mobile = "15010793767";
         String mobile = null;
-        System.out.println(StringUtils.rightPad(StringUtils.left(mobile, 3),7,"*"));
+        System.out.println(StringUtils.rightPad(StringUtils.left(mobile, 3), 7, "*"));
 
         //System.out.println(mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
-        System.out.println(RegExUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
-        System.out.println(StringUtils.replaceAll(mobile,"(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(RegExUtils.replaceAll(mobile, "(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        System.out.println(StringUtils.replaceAll(mobile, "(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
 
 
     }
